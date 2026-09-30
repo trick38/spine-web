@@ -409,6 +409,32 @@ svg.sym.s-unlocked,svg.sym.s-blocked{color:var(--glow)}
 .statestrip span{font-size:.72rem;color:var(--mute);text-align:center;line-height:1.25}
 .lang{flex:none;font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--mute);text-decoration:none;border:1px solid var(--line-2);border-radius:999px;padding:.35rem .7rem}
 .lang:hover{color:var(--fg);border-color:var(--glow)}
+
+.gsrc{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.2rem 0 1.2rem;font-family:var(--mono);font-size:.8rem}
+.gsrc span{padding:.35rem .7rem;border:1px solid var(--line-2);border-radius:999px;background:var(--panel);color:var(--bone)}
+.gsrc i{font-style:normal;color:var(--glow)}
+.xls{border:1px solid var(--line-2);border-radius:10px;overflow-x:auto;background:#f4f6f5;color:#1d2b2e;font-size:.7rem}
+.xls>div{display:grid;grid-template-columns:minmax(8rem,1.5fr) 3.8rem 3.4rem minmax(6rem,1.4fr) 5.6rem 4rem;min-width:31rem;border-top:1px solid #d6dedd}
+.xls>div>span{padding:.4rem .5rem;border-left:1px solid #d6dedd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xls .xh{background:#0c6b75;color:#fff;font-weight:600;border-top:0}
+.xls .xh span{border-left-color:rgba(255,255,255,.2)}
+.xls .y{background:#fff4c2}
+.xls .xh .y{background:#b8860b;color:#fff}
+.xls .t.fel{background:#f8d3cd;color:#8a1c10}
+.xls .t.varn{background:#fbe8b8;color:#7a5200}
+.xls .t.atg{background:#d3ecdc;color:#1d6b3e}
+.gstat{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.gstat .t{font-size:.72rem;padding:.2rem .55rem;border-radius:4px;border:1px solid}
+.gstat .fel{color:var(--fire);border-color:rgba(255,106,87,.4)}
+.gstat .varn{color:var(--warn);border-color:rgba(233,182,74,.4)}
+.gstat .info{color:var(--glow);border-color:rgba(70,188,200,.4)}
+.gstat .atg,.gstat .ok{color:var(--ok);border-color:rgba(79,199,154,.4)}
+.itgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.itc{border:1px solid var(--line-2);border-radius:14px;padding:1.4rem;background:var(--ink);display:grid;gap:.8rem;align-content:start;min-width:0}
+.itc h3{font-size:1.3rem;font-weight:300}
+.itc>p{color:var(--mute);font-size:.92rem}
+.itc .spec th{width:30%}
+@media (max-width:820px){.itgrid{grid-template-columns:minmax(0,1fr)}}
 footer{padding-block:3rem;color:var(--dim);font-size:.82rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
 </style>
@@ -429,6 +455,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
       <li><a class="l" href="#provning">Provning</a></li>
       <li><a class="l" href="#integrationer">Integrationer</a></li>
       <li><a class="l" href="#server">Server</a></li>
+      <li><a class="l" href="#it">IT</a></li>
       <li><a class="l" href="#kvalitet">Kvalitet</a></li>
       <li><a class="l" href="#regelverk">CRA &amp; GDPR</a></li>
     </ul>
@@ -632,6 +659,38 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
           <div><b>0</b><span>gissningar ur enhetsnamn</span></div>
         </div>
         <p class="note">Mätt på ett riktigt blad från en SecuriFire-anläggning.</p>
+      </div>
+    </div>
+
+    <h3 class="sub" id="genomgang">Genomgång: centralen, exporten, ritningen och Spine mot varandra <span class="pill drift" style="vertical-align:middle">ny</span></h3>
+    <div class="cols" style="align-items:start">
+      <div class="block">
+        <p>Vid en nyinstallation, och varje gång en ny export eller ritning laddas upp, går Spine igenom hela anläggningen. Genomgången ställer fyra källor mot varandra och ger en rad per avvikelse med ett förslag på vad som ska göras.</p>
+        <div class="gsrc"><span>Centralen</span><i>↔</i><span>Exporten</span><i>↔</i><span>Ritningen</span><i>↔</i><span>Spine</span></div>
+        <ul class="checks">
+          <li><div>Excel till teknikern<span>Färg per status, filter, fast rubrikrad och två gula kolumner för kommentar och åtgärdad</span></div></li>
+          <li><div>PDF till kunden<span>Avvikelserna grupperade per status</span></div></li>
+          <li><div>Varje körning sparas som revision<span>Nästa genomgång visar vad som är nytt, vad som står kvar och vad teknikern har åtgärdat</span></div></li>
+          <li><div>Ingenting rättas automatiskt<span>En symbol kopplad till fel punkt skulle visa en brand i fel korridor, så varje rad är ett förslag till en människa</span></div></li>
+        </ul>
+        <p class="note tech">Ritningens text läses i webbläsaren med samma läsning som autoplaceringen. Blad utan textlager står som ej lästa, aldrig som OK. De senaste 8 revisionerna sparas. Kräver förvaltningsnivå underhåll.</p>
+      </div>
+      <div>
+        <div class="xls" role="img" aria-label="Exempel på genomgångens Excel-fil">
+          <div class="xh"><span>Status</span><span>Sedan förra</span><span>Punkt</span><span>Förslag</span><span class="y">Kommentar</span><span class="y">Åtgärdad</span></div>
+          <div><span class="t fel">Placerad men finns inte</span><span>ny</span><span>01.214</span><span>Ta bort symbolen eller koppla om</span><span class="y"></span><span class="y"></span></div>
+          <div><span class="t fel">På ritningen, inte i exporten</span><span>kvar</span><span>70/31</span><span>Kontrollera adressen på plats</span><span class="y">Fel på ritningen</span><span class="y">ja</span></div>
+          <div><span class="t varn">Trolig omdöpning</span><span>ny</span><span>02.007</span><span>Koppla om till 02.070</span><span class="y"></span><span class="y"></span></div>
+          <div><span class="t varn">Annat blad än ritningen</span><span>kvar</span><span>03.112</span><span>Flytta till plan 3</span><span class="y"></span><span class="y"></span></div>
+          <div><span class="t varn">Ej placerad</span><span>ny</span><span>04.001</span><span>Placera på plan 4</span><span class="y"></span><span class="y"></span></div>
+          <div><span class="t atg">Åtgärdad sedan förra</span><span>åtgärdad</span><span>01.009</span><span>Finns inte längre</span><span class="y"></span><span class="y"></span></div>
+        </div>
+        <p class="note">Exempel. Filen har två blad: en sammanfattning med antal per status och själva listan.</p>
+        <div class="gstat">
+          <span class="t fel">Placerad men finns inte</span><span class="t fel">På ritningen men inte i exporten</span><span class="t fel">I exporten men inte i centralen</span>
+          <span class="t varn">Trolig omdöpning</span><span class="t varn">Annat blad än ritningen</span><span class="t varn">Ej placerad</span><span class="t varn">I centralen men inte i exporten</span>
+          <span class="t info">Placerad, men inte på ritningens blad</span><span class="t atg">Åtgärdad sedan förra</span><span class="t ok">OK</span>
+        </div>
       </div>
     </div>
   </div>
@@ -887,6 +946,84 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 </section>
 
 <!-- KVALITET -->
+
+<section class="sec" id="it">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="k">För IT-avdelningen</span>
+      <h2>Det IT behöver veta innan installation</h2>
+      <p>Spine är byggt för att passa in i en IT-miljö med höga krav. Inget lyssnar i centralernas nät, inget ringer hem och inget kräver internet.</p>
+    </div>
+    <div class="itgrid">
+      <article class="itc">
+        <h3>Nätverk och brandvägg</h3>
+        <div class="tscroll"><table class="spec">
+          <tr><th>Till servern</th><td>En port, <code>18080</code> TCP, från stationer och drivrutiner. HTTPS och WSS när kryptering är påslagen.</td></tr>
+          <tr><th>Centralernas nät</th><td>Inget inkommande. Drivrutinen ansluter utåt till servern och mot centralen på fabrikatets port, till exempel OPC UA eller Modbus TCP.</td></tr>
+          <tr><th>Internet</th><td>Krävs inte. Behövs bara för molnfabrikat och för notiser via e-post, SMS eller Teams.</td></tr>
+          <tr><th>Telemetri</th><td>Ingen. Ingen fjärråtkomst in till anläggningen.</td></tr>
+          <tr class="tech"><th>Bara lokalt</th><td><code>18078</code> statussida, <code>18079</code> kontrollport. <code>18081</code> analys, avstängd som förval.</td></tr>
+        </table></div>
+      </article>
+      <article class="itc">
+        <h3>Virtualisering och kluster</h3>
+        <div class="tscroll"><table class="spec">
+          <tr><th>Plattform</th><td>Vanlig virtuell Windows-server, till exempel i VMware eller Hyper-V</td></tr>
+          <tr><th>Flytt i kluster</th><td>Fungerar. Licensen följer med vid live-migrering och omstart på annan värd. En kopia av servern till en ny maskin fungerar däremot inte.</td></tr>
+          <tr><th>Hög tillgänglighet</th><td>Via hypervisorn. Spine kör som en instans; aktiv/aktiv med två servrar stöds inte ännu.</td></tr>
+          <tr><th>Efter omstart</th><td>Tjänsten startar själv, drivrutinerna ringer upp och skickar hela läget. Scheman som missats under avbrottet genomförs direkt.</td></tr>
+          <tr><th>Säkerhetskopia</th><td>Nattlig kopia på några MB, 14 sparas. Återställning cirka två timmar.</td></tr>
+          <tr><th>Dödmansgrepp</th><td>Spine anropar en adress i er övervakning med jämna mellanrum. Tystnar anropen vet ni att Spine har stannat.</td></tr>
+        </table></div>
+        <p class="note">Brandcentralens egen väg till larmcentralen är alltid oberoende av Spine-servern.</p>
+      </article>
+      <article class="itc">
+        <h3>Inloggning och tvåstegsverifiering</h3>
+        <div class="tscroll"><table class="spec">
+          <tr><th>Konton</th><td>Lokalt register. Lösenord lagras bara som scrypt-hash. Sessionen är en slumpad token i en HttpOnly-kaka; filen på disk håller bara dess hash.</td></tr>
+          <tr><th>Tvåsteg</th><td>Autentiseringsapp (TOTP, till exempel Microsoft Authenticator), SMS-kod eller passkey. Åtta reservkoder.</td></tr>
+          <tr><th>Passkey</th><td>Inloggning med enbart passkey, utan lösenord</td></tr>
+          <tr><th>Krav</th><td>Per konto eller för hela installationen: ingen, bara förvaltare, eller alla</td></tr>
+          <tr><th>Spärr</th><td>Fem felaktiga försök låser adressen en stund</td></tr>
+          <tr><th>Sessioner</th><td>Avslutas efter 12 timmar utan aktivitet eller 30 dygn, inställbart</td></tr>
+          <tr><th>Nedlåsning</th><td>En session eller en person kan låsas direkt, till exempel vid hot</td></tr>
+        </table></div>
+      </article>
+      <article class="itc">
+        <h3>AD och Entra ID <span class="pill planerad" style="vertical-align:middle">planerat</span></h3>
+        <p>Inloggning mot kundens katalog kommer som ett komplement till det lokala registret.</p>
+        <ul class="checks">
+          <li><div>AD via LDAP, Entra ID via OpenID Connect<span>Användarna loggar in med sina vanliga konton</span></div></li>
+          <li><div>Samma behörighetsmodell<span>Katalogen ger samma behörighet per disciplin och förvaltningsnivå som ett lokalt konto har i dag</span></div></li>
+          <li><div>Tvåsteg enligt er policy<span>Med Entra ID gäller organisationens egna krav på inloggning</span></div></li>
+          <li><div>Lokala konton finns alltid kvar<span>Ett avbrott i katalogen får aldrig låsa ute en operatör under ett brandlarm</span></div></li>
+        </ul>
+      </article>
+      <article class="itc">
+        <h3>Behörighet</h3>
+        <div class="tscroll"><table class="spec">
+          <tr><th>Per disciplin</th><td>Läsa, operera, tekniker eller administratör, var för sig för brand, inbrott, passage och övriga</td></tr>
+          <tr><th>Förvaltning</th><td>Operatör, underhåll (ritningar, symboler, drivrutiner) eller systemansvarig</td></tr>
+          <tr><th>Per byggnad</th><td>Kontot ser bara de byggnader det har rätt till. Filtreras på servern.</td></tr>
+          <tr><th>Stationer</th><td>Väggskärmar med låst vy och tidsgräns</td></tr>
+          <tr><th>Första start</th><td>Öppen tills första administratören skapats, med tydlig varning. Skapa administratören direkt vid installation.</td></tr>
+        </table></div>
+      </article>
+      <article class="itc">
+        <h3>Kryptering, drift och uppdatering</h3>
+        <div class="tscroll"><table class="spec">
+          <tr><th>Kryptering</th><td>HTTPS och WSS på samma port. Eget certifikat skapas automatiskt, eller används ert. Drivrutinerna nålar serverns nyckel.</td></tr>
+          <tr><th>Hemligheter</th><td>Lösenord till centraler krypteras med Windows DPAPI, aldrig i klartext i konfigurationen</td></tr>
+          <tr><th>Tjänst</th><td>Windows-tjänst som startar utan inloggning och startar om vid fel</td></tr>
+          <tr><th>Uppdatering</th><td>Signerat paket laddas upp en gång, varje maskin uppdateras från servern. Inget hämtas från internet.</td></tr>
+          <tr><th>Återgång</th><td>Versionerna ligger bredvid varandra. En version som inte startar ersätts automatiskt av den förra.</td></tr>
+          <tr><th>Data</th><td>Lokalt i ProgramData. Ingen databas att drifta.</td></tr>
+        </table></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="sec alt" id="kvalitet">
   <div class="wrap">
     <div class="sec-head">
