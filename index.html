@@ -89,7 +89,7 @@ p{margin:0}
 .lede{font-size:clamp(1.15rem,2.2vw,1.45rem);font-weight:300;line-height:1.45;max-width:33rem}
 .hero-facts{display:flex;flex-wrap:wrap;gap:.6rem 1.8rem;margin-top:.8rem;padding-top:1.2rem;border-top:1px solid var(--line);font-size:var(--s-1);color:var(--mute)}
 .hero-facts b{display:block;font-family:var(--mono);font-weight:500;font-size:1.05rem;color:var(--bone);font-variant-numeric:tabular-nums}
-@media (max-width:760px){#spineCanvas{opacity:.35}}
+@media (max-width:760px){.hero .wrap{padding-top:10.5rem}.hero::before{mask-image:linear-gradient(180deg,#000 0,transparent 12rem);-webkit-mask-image:linear-gradient(180deg,#000 0,transparent 12rem)}}
 
 /* sektioner */
 section.sec{padding-block:clamp(3.5rem,8vw,6rem);border-bottom:1px solid var(--line)}
@@ -1251,24 +1251,37 @@ const cv=document.getElementById("spineCanvas"),ctx=cv.getContext("2d");
 let W=0,H=0;
 function size(){const r=cv.getBoundingClientRect();const d=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0);}
 const N=13,pulses=[];let nextPulse=0;const alarmAt=4200;
+const mob=()=>W<=760;
 function geom(){return{cx:W>760?W*.72:W*.62,amp:Math.min(70,W*.05),top:-H*.04,bot:H*1.04,base:Math.min(210,W*.16)};}
 const sx=(g,t)=>g.cx-g.amp*.5+g.amp*Math.sin(Math.PI*t);
+// Returnerar punkt på ryggraden och revbenens ändar, stående (desktop) eller liggande (mobil)
+function pos(t){
+  if(!mob()){const g=geom();return{x:sx(g,t),y:g.top+(g.bot-g.top)*t};}
+  const cy=Math.min(80,H*.1),l=-W*.04,r=W*1.04;return{x:l+(r-l)*t,y:cy+18*Math.sin(Math.PI*t)-9};
+}
+function rib(t,i){
+  const p=pos(t),s=Math.sin(Math.PI*t);
+  if(!mob()){const g=geom(),L=g.base*(.5+.5*s),ang=-.24*(1-2*t);return[p.x-L*.9*Math.cos(ang),p.y-L*.9*Math.sin(ang),p.x+L*1.05*Math.cos(ang),p.y+L*1.05*Math.sin(ang)];}
+  const L=Math.min(46,W*.11)*(.55+.45*s),ang=.24*(1-2*t);return[p.x+L*.9*Math.sin(ang),p.y-L*.9*Math.cos(ang),p.x-L*1.05*Math.sin(ang),p.y+L*1.05*Math.cos(ang)];
+}
 function draw(ts){
-  if(!W)size();ctx.clearRect(0,0,W,H);const g=geom();
-  const grd=ctx.createLinearGradient(0,g.top,0,g.bot);grd.addColorStop(0,"rgba(203,216,218,.15)");grd.addColorStop(.5,"rgba(215,228,230,.95)");grd.addColorStop(1,"rgba(203,216,218,.15)");
-  ctx.strokeStyle=grd;ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();
-  for(let k=0;k<=60;k++){const t=k/60,y=g.top+(g.bot-g.top)*t,x=sx(g,t);k?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();
+  if(!W)size();ctx.clearRect(0,0,W,H);const M=mob(),n=M?17:N;
+  const p0=pos(0),p1=pos(1),grd=M?ctx.createLinearGradient(p0.x,0,p1.x,0):ctx.createLinearGradient(0,p0.y,0,p1.y);
+  grd.addColorStop(0,"rgba(203,216,218,.15)");grd.addColorStop(.5,"rgba(215,228,230,.95)");grd.addColorStop(1,"rgba(203,216,218,.15)");
+  ctx.strokeStyle=grd;ctx.lineWidth=M?3:4;ctx.lineCap="round";ctx.beginPath();
+  for(let k=0;k<=60;k++){const q=pos(k/60);k?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.stroke();
   const now=ts||0;
   if(!rm&&now>nextPulse){pulses.push({t0:now,red:now>alarmAt&&!pulses.some(p=>p.red)});nextPulse=now+2600+Math.random()*1400;}
   const dur=3800;for(let i=pulses.length-1;i>=0;i--)if(now-pulses[i].t0>dur+1500)pulses.splice(i,1);
-  for(let i=0;i<N;i++){
-    const t=(i+.5)/N,y=g.top+(g.bot-g.top)*t,x=sx(g,t),s=Math.sin(Math.PI*t),L=g.base*(.5+.5*s),ang=-.24*(1-2*t),vis=.25+.75*s;
-    let glow=0,red=false;for(const p of pulses){const d=(now-p.t0)/dur-t;if(d>=0&&d<.35){const e=1-d/.35;if(e>glow){glow=e;red=p.red&&i===7;}}}
-    const x1=x-L*.9*Math.cos(ang),y1=y-L*.9*Math.sin(ang),x2=x+L*1.05*Math.cos(ang),y2=y+L*1.05*Math.sin(ang);
-    ctx.lineWidth=9;ctx.strokeStyle=`rgba(203,216,218,${(.12+.72*vis).toFixed(3)})`;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
-    if(glow>.02){ctx.save();ctx.shadowBlur=24;ctx.shadowColor=red?"rgba(255,106,87,.9)":"rgba(70,188,200,.9)";ctx.strokeStyle=red?`rgba(255,120,100,${glow})`:`rgba(110,215,225,${glow*.9})`;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore();}
+  const redI=Math.floor(n/2);
+  for(let i=0;i<n;i++){
+    const t=(i+.5)/n,s=Math.sin(Math.PI*t),vis=.25+.75*s;
+    let glow=0,red=false;for(const p of pulses){const d=(now-p.t0)/dur-t;if(d>=0&&d<.35){const e=1-d/.35;if(e>glow){glow=e;red=p.red&&i===redI;}}}
+    const [x1,y1,x2,y2]=rib(t,i);
+    ctx.lineWidth=M?6:9;ctx.strokeStyle=`rgba(203,216,218,${(.12+.72*vis).toFixed(3)})`;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+    if(glow>.02){ctx.save();ctx.shadowBlur=M?16:24;ctx.shadowColor=red?"rgba(255,106,87,.9)":"rgba(70,188,200,.9)";ctx.strokeStyle=red?`rgba(255,120,100,${glow})`:`rgba(110,215,225,${glow*.9})`;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore();}
   }
-  for(const p of pulses){const pt=(now-p.t0)/dur;if(pt<0||pt>1)continue;const y=g.top+(g.bot-g.top)*pt,x=sx(g,pt);const r=ctx.createRadialGradient(x,y,0,x,y,28);r.addColorStop(0,p.red?"rgba(255,140,120,.9)":"rgba(140,230,238,.9)");r.addColorStop(1,"rgba(70,188,200,0)");ctx.fillStyle=r;ctx.beginPath();ctx.arc(x,y,28,0,Math.PI*2);ctx.fill();}
+  for(const p of pulses){const pt=(now-p.t0)/dur;if(pt<0||pt>1)continue;const q=pos(pt),R=M?20:28;const r=ctx.createRadialGradient(q.x,q.y,0,q.x,q.y,R);r.addColorStop(0,p.red?"rgba(255,140,120,.9)":"rgba(140,230,238,.9)");r.addColorStop(1,"rgba(70,188,200,0)");ctx.fillStyle=r;ctx.beginPath();ctx.arc(q.x,q.y,R,0,Math.PI*2);ctx.fill();}
   if(!rm)requestAnimationFrame(draw);
 }
 size();window.addEventListener("resize",()=>{size();if(rm)draw(0);});
