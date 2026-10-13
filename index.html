@@ -435,6 +435,8 @@ svg.sym.s-unlocked,svg.sym.s-blocked{color:var(--glow)}
 .itc>p{color:var(--mute);font-size:.92rem}
 .itc .spec th{width:30%}
 @media (max-width:820px){.itgrid{grid-template-columns:minmax(0,1fr)}}
+.newgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-width:900px){.newgrid{grid-template-columns:minmax(0,1fr)}}
 footer{padding-block:3rem;color:var(--dim);font-size:.82rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
 </style>
@@ -604,6 +606,57 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <div class="chan" id="chan" style="grid-template-columns:repeat(2,minmax(0,1fr))"></div>
       </div>
     </div>
+
+    <h3 class="sub">Larm som når fram, också utan app</h3>
+    <div class="newgrid">
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">ny</span>
+        <h3>Larmsida för SMS</h3>
+        <p>Ett larm-SMS slutar med en kort länk. Sidan visar larmet, läget just nu, ritningen med donet inringat och kamerabilden. Ingen app och ingen inloggning behövs för att se den.</p>
+        <ul class="checks">
+          <li><div>Egen sida per mottagare<span>Lever en timme och visar inget annat än larmet</span></div></li>
+          <li><div>Kan inte styra något<span>Kommandon kräver inloggning i Spine</span></div></li>
+          <li><div>Spårbart<span>Journalen visar vem som öppnade länken</span></div></li>
+        </ul>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">ny</span>
+        <h3>RCS-meddelanden</h3>
+        <p>Larmet kommer som ett kort i telefonens vanliga meddelandeapp: avsändarens logga, ritningen med donet och sedan kamerabilden. En knapp öppnar larmet direkt i Spine.</p>
+        <ul class="checks">
+          <li><div>Bekräftad leverans<span>Spine vet när meddelandet nått telefonen</span></div></li>
+          <li><div>SMS som reserv<span>Telefoner utan RCS får SMS med länk till larmsidan</span></div></li>
+        </ul>
+        <p class="note">Kvittera direkt från meddelandet är under införande.</p>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">ny</span>
+        <h3>Överfallslarm med position</h3>
+        <p>När en bärbar överfallsknapp larmar får den som bär den en länk som delar telefonens position. Positionen syns på kartan och i larmet, med koordinater att läsa upp för 112.</p>
+        <ul class="checks">
+          <li><div>Larmet säger vem som bär knappen<span>Eget larmläge, allvarligare än inbrott</span></div></li>
+          <li><div>Sparas bara så länge det behövs<span>Till larmet är återställt plus ett dygn</span></div></li>
+        </ul>
+        <p class="note">Provat på riktig telefon: position inom 16 meter på sju sekunder.</p>
+      </article>
+    </div>
+    <div class="cols mt">
+      <div class="block">
+        <h3>Rätt larm, en gång</h3>
+        <ul class="checks">
+          <li><div>Ett brandlarm skickas alltid<span>Fler detektorer i samma brand blir en uppföljning, inte en flod av meddelanden</span></div></li>
+          <li><div>Varje försämring skickas<span>Förlarm som blir brand, sabotage som blir inbrott: nytt meddelande och ny kvittens</span></div></li>
+          <li><div>Förlarm går som text<span>Kort och snabbt, bilden kommer med brandlarmet</span></div></li>
+          <li><div>Inga dubbletter<span>Påminnelse om okvitterat larm går en gång</span></div></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3>Frånkoppling med dubbel säkerhet</h3>
+        <p>Den som frånkopplar en detektor anger hur länge. Spine kopplar in igen på minuten, och brandcentralen får samma tid i sin egen timer. Är Spine eller förbindelsen nere när tiden går ut kopplar centralen in själv.</p>
+        <h3 style="margin-top:1.6rem">Snabb på mobilen</h3>
+        <p>Sidan sparas i telefonen. Första start tar runt fem sekunder på en svag uppkoppling, nästa under en sekund.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -716,7 +769,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <div class="tscroll"><table class="spec grid">
           <tr><th>Fabrikat</th><th>Värden</th><th>Status</th></tr>
           <tr><td>Schneider Esmi / EFO</td><td>Nedsmutsning 0–100 %, råvärde 0–255</td><td><span class="pill drift">i drift</span></td></tr>
-          <tr><td>Hedengren Firescape</td><td>Nedsmutsning, månadsrapport</td><td><span class="pill byggd">byggd</span></td></tr>
+          <tr><td>Hedengren Firescape</td><td>Nedsmutsning, månadsrapport</td><td><span class="pill drift">i drift</span></td></tr>
           <tr><td>Hedengren Neptolux</td><td>Batterikapacitet i minuter, temperatur</td><td><span class="pill byggd">byggd</span></td></tr>
           <tr><td>Consilium</td><td>Rök i % av larmnivå, temperatur, nedsmutsning</td><td><span class="pill byggd">byggd</span></td></tr>
           <tr><td>Securiton SecuriFire</td><td>Rök, temperatur, CO, nedsmutsning, luftflöde i aspirerande rör</td><td><span class="pill planerad">planerad</span></td></tr>
@@ -841,7 +894,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
     <div class="sec-head">
       <span class="k">Arkitektur</span>
       <h2>En väg ut ur kundnätet</h2>
-      <p class="lay">Spine installeras hos kunden, på en vanlig Windows-server. Den lilla programdelen vid varje central ringer ut till servern. Därför behöver inga portar öppnas in mot centralernas nät, vilket de flesta IT-avdelningar kräver.</p>
+      <p class="lay">Spine installeras hos kunden, på en vanlig Windows- eller Linux-server. Den lilla programdelen vid varje central ringer ut till servern. Därför behöver inga portar öppnas in mot centralernas nät, vilket de flesta IT-avdelningar kräver.</p>
       <p class="tech">Samma kod körs på en maskin eller delad. Bara drivrutinens konfiguration skiljer. On-prem är primärt och Spine kan köra helt utan internet.</p>
     </div>
     <div class="flow" role="img" aria-label="Flöde: centraler, drivrutin, server, användare">
@@ -867,7 +920,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <h3>Nordlänken</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Transport</th><td><code>ws://</code> eller <code>wss://</code>, drivrutinen initierar, full resync vid varje återanslutning</td></tr>
-          <tr><th>Autentisering</th><td>Delad token i konstant tid. Tillåtelselista över kända drivrutiner kan slås på.</td></tr>
+          <tr><th>Autentisering</th><td>Egen nyckel per drivrutin och per maskin, kan göras obligatorisk. En ny nyckel stänger den gamla anslutningen.</td></tr>
           <tr><th>Nyckelnålning</th><td><code>north.pin</code>: pinnad, först, av, klartext</td></tr>
           <tr><th>Publika adresser</th><td>Okrypterad <code>ws://</code> vägras mot publika adresser</td></tr>
           <tr><th>Takt per socket</th><td>Drivrutin 2 000 ramar/s (skur 8 000), klient 100/s, 600 ms CPU/s, max 16 MiB per ram</td></tr>
@@ -920,9 +973,9 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <div class="block">
         <h3>Gäller alla storlekar</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Operativsystem</th><td>Windows Server x64. Körs som Windows-tjänst.</td></tr>
+          <tr><th>Operativsystem</th><td>Windows Server x64 eller Linux x64 (Ubuntu 24.04 LTS). Körs som tjänst.</td></tr>
           <tr><th>Databas</th><td>Ingen. Säkerhetskopia är en kopia av en mapp.</td></tr>
-          <tr><th>Drivrutinsmaskin</th><td>Valfri Windows-dator i centralens nät, cirka 100 MB minne per drivrutin. Kräver ingen egen licens.</td></tr>
+          <tr><th>Drivrutinsmaskin</th><td>Valfri Windows- eller Linux-dator i centralens nät, cirka 100 MB minne per drivrutin. Kräver ingen egen licens.</td></tr>
           <tr><th>Klienter</th><td>Webbläsare på dator, väggskärm eller telefon</td></tr>
           <tr><th>Journal</th><td>Cirka 150 MB för 13 månader vid 2 000 händelser per dygn</td></tr>
           <tr><th>Redundans</th><td>Via virtualiseringen: servern flyttas mellan värdar. Aktiv/aktiv kluster stöds inte ännu.</td></tr>
@@ -938,7 +991,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
           <tr><th><code>18079</code></th><td>Kontrollport, bara loopback</td></tr>
           <tr><th>Minne</th><td>~100 MB + 10 MB per 1 000 punkter i vila, dubbelt i topp</td></tr>
           <tr><th>I drift</th><td>2 415 punkter, 7 drivrutiner: 145 MB platt i 8 h, eventloop p95 27 ms</td></tr>
-          <tr><th>Paket</th><td>Server ~66 MB med inbäddad Node 24, drivrutin ~43 MB</td></tr>
+          <tr><th>Paket</th><td>Fullt paket med inbäddad Node 24. Uppdateringar kan levereras som delta på några MB.</td></tr>
         </table></div>
       </div>
     </div>
@@ -968,7 +1021,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <article class="itc">
         <h3>Virtualisering och kluster</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Plattform</th><td>Vanlig virtuell Windows-server, till exempel i VMware eller Hyper-V</td></tr>
+          <tr><th>Plattform</th><td>Vanlig virtuell Windows- eller Linux-server, till exempel i VMware eller Hyper-V</td></tr>
           <tr><th>Flytt i kluster</th><td>Fungerar. Licensen följer med vid live-migrering och omstart på annan värd. En kopia av servern till en ny maskin fungerar däremot inte.</td></tr>
           <tr><th>Hög tillgänglighet</th><td>Via hypervisorn. Spine kör som en instans; aktiv/aktiv med två servrar stöds inte ännu.</td></tr>
           <tr><th>Efter omstart</th><td>Tjänsten startar själv, drivrutinerna ringer upp och skickar hela läget. Scheman som missats under avbrottet genomförs direkt.</td></tr>
@@ -982,9 +1035,10 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <div class="tscroll"><table class="spec">
           <tr><th>Konton</th><td>Lokalt register. Lösenord lagras bara som scrypt-hash. Sessionen är en slumpad token i en HttpOnly-kaka; filen på disk håller bara dess hash.</td></tr>
           <tr><th>Tvåsteg</th><td>Autentiseringsapp (TOTP, till exempel Microsoft Authenticator), SMS-kod eller passkey. Åtta reservkoder.</td></tr>
+          <tr><th>Glömt lösenord</th><td>Engångslänk till kontots e-post eller mobil. Ett lösenordsbyte avslutar alla sessioner.</td></tr>
           <tr><th>Passkey</th><td>Inloggning med enbart passkey, utan lösenord</td></tr>
           <tr><th>Krav</th><td>Per konto eller för hela installationen: ingen, bara förvaltare, eller alla</td></tr>
-          <tr><th>Spärr</th><td>Fem felaktiga försök låser adressen en stund</td></tr>
+          <tr><th>Spärr</th><td>Upprepade felförsök ger allt längre väntan, per konto och per adress</td></tr>
           <tr><th>Sessioner</th><td>Avslutas efter 12 timmar utan aktivitet eller 30 dygn, inställbart</td></tr>
           <tr><th>Nedlåsning</th><td>En session eller en person kan låsas direkt, till exempel vid hot</td></tr>
         </table></div>
@@ -1002,7 +1056,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <article class="itc">
         <h3>Behörighet</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Per disciplin</th><td>Läsa, operera, tekniker eller administratör, var för sig för brand, inbrott, passage och övriga</td></tr>
+          <tr><th>Per disciplin</th><td>Läsa, operera, tekniker eller administratör, var för sig för alla sju discipliner. Egna roller kan skapas.</td></tr>
           <tr><th>Förvaltning</th><td>Operatör, underhåll (ritningar, symboler, drivrutiner) eller systemansvarig</td></tr>
           <tr><th>Per byggnad</th><td>Kontot ser bara de byggnader det har rätt till. Filtreras på servern.</td></tr>
           <tr><th>Stationer</th><td>Väggskärmar med låst vy och tidsgräns</td></tr>
@@ -1013,11 +1067,11 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <h3>Kryptering, drift och uppdatering</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Kryptering</th><td>HTTPS och WSS på samma port. Eget certifikat skapas automatiskt, eller används ert. Drivrutinerna nålar serverns nyckel.</td></tr>
-          <tr><th>Hemligheter</th><td>Lösenord till centraler krypteras med Windows DPAPI, aldrig i klartext i konfigurationen</td></tr>
-          <tr><th>Tjänst</th><td>Windows-tjänst som startar utan inloggning och startar om vid fel</td></tr>
-          <tr><th>Uppdatering</th><td>Signerat paket laddas upp en gång, varje maskin uppdateras från servern. Inget hämtas från internet.</td></tr>
+          <tr><th>Hemligheter</th><td>Lösenord till centraler hålls utanför konfigurationen: krypterade med DPAPI på Windows, i en fil bara tjänsten kan läsa på Linux</td></tr>
+          <tr><th>Tjänst</th><td>Windows-tjänst eller systemd på Linux. Startar utan inloggning och startar om vid fel</td></tr>
+          <tr><th>Uppdatering</th><td>Signerat paket laddas upp en gång, varje maskin uppdateras från servern. Osignerade paket vägras. Inget hämtas från internet.</td></tr>
           <tr><th>Återgång</th><td>Versionerna ligger bredvid varandra. En version som inte startar ersätts automatiskt av den förra.</td></tr>
-          <tr><th>Data</th><td>Lokalt i ProgramData. Ingen databas att drifta.</td></tr>
+          <tr><th>Data</th><td>Lokalt på servern. Ingen databas att drifta.</td></tr>
         </table></div>
       </article>
     </div>
@@ -1032,8 +1086,8 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <p>Ett system som styr brandlarm och dörrar får inte gissa. Därför provas koden i flera lager, mot riktiga centraler och mot leverantörernas egna specifikationer.</p>
     </div>
     <div class="bign">
-      <div><b>2 200+</b><span>automatiska kontroller i de största provsviterna</span></div>
-      <div><b>128+</b><span>byggen i registret, spårbara till varje kund</span></div>
+      <div><b>300+</b><span>provfiler som körs före varje utgåva</span></div>
+      <div><b>16</b><span>omgångar oberoende granskning av hela källkoden</span></div>
       <div><b>6</b><span>riktiga system provade: brand, passage, moln</span></div>
       <div><b>0</b><span>kända sårbarheter i beroendena vid bygge</span></div>
     </div>
@@ -1042,9 +1096,10 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <li><b>Mot riktiga centraler</b><p>Frånkoppling och återkoppling på en riktig brandcentral, dörrar i riktiga ARX-, RCO- och Brivo-system, Hedengren mot molnet.</p></li>
         <li><b>Hela vägen till skärmen</b><p>Prov kör från centralens fil via drivrutin och server hela vägen till en riktig webbläsare.</p></li>
         <li><b>Leverantörernas specifikationer som simulatorer</b><p>Innan en central finns på plats provas drivrutinen mot en simulator byggd ur leverantörens protokollbeskrivning.</p></li>
+        <li><b>Varje väg in kontrolleras</b><p>En tabell listar alla vägar in i servern och vilken behörighet var och en kräver. Ett prov läser koden och stoppar bygget om en väg saknar sin kontroll.</p></li>
         <li><b>Fabrikaten hålls isär</b><p>Ett eget prov stoppar bygget om något som bara hör till ett fabrikat hamnar i den gemensamma koden.</p></li>
         <li><b>Last och kapacitet</b><p>En rigg bygger anläggningar upp till 50 000 punkter och 100 klienter och mäter varje release.</p></li>
-        <li><b>Säkerhetsgranskningar</b><p>Återkommande granskningar av servern, drivrutinerna, sidan och paketen. Extern penetrationstest planeras hösten 2026.</p></li>
+        <li><b>Säkerhetsgranskningar</b><p>Hela källkoden har granskats i 16 omgångar av en oberoende AI-granskare, varje omgång mot en ny version. Fem penetrationstester har körts mot en körande server med konton på alla nivåer. Över 180 fynd är rättade, vart och ett med ett prov. En extern oberoende granskning förbereds.</p></li>
       </ul>
       <div class="block">
         <h3>Regler som gäller all kod</h3>
@@ -1079,7 +1134,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <p>Förordningen kräver säker utveckling, hantering av sårbarheter och säkerhetsuppdateringar under produktens livstid.</p>
         <ul class="checks">
           <li><div>Innehållsförteckning i varje paket<span>SBOM i CycloneDX-format listar alla komponenter</span></div></li>
-          <li><div>Signerade uppdateringar<span>Två nycklar, kontrolleras på den maskin som installerar</span></div></li>
+          <li><div>Signerade uppdateringar<span>Två nycklar, kontrolleras på den maskin som installerar. Osignerat vägras</span></div></li>
           <li><div>10 års säkerhetsuppdateringar<span>Supportperioden står i produkten</span></div></li>
           <li><div>Uppdateringar blockeras aldrig av licensen<span>En utgången licens stoppar inte en säkerhetsuppdatering</span></div></li>
           <li><div>Kontaktväg för sårbarheter<span>security.txt och SECURITY.md i varje installation</span></div></li>
@@ -1111,7 +1166,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <h3>Inloggning och behörighet</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Tvåstegsinloggning</th><td>Kod i app, SMS-kod, passkey och reservkoder</td></tr>
-          <tr><th>Roller</th><td>Per disciplin: läsa, operera, tekniker, administratör</td></tr>
+          <tr><th>Roller</th><td>Per disciplin: läsa, operera, tekniker, administratör, eller egna roller</td></tr>
           <tr><th>Per byggnad</th><td>Operatören ser bara de byggnader den har rätt till</td></tr>
           <tr><th>Förvaltning</th><td>Skilj på daglig drift (ritningar, symboler) och systemansvar</td></tr>
           <tr><th>Licens</th><td>Fungerar helt offline. Följer med vid migrering, men går inte att klona.</td></tr>
@@ -1121,11 +1176,12 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <span class="techtag">Teknik</span>
         <h3>Säkerhet i detalj</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Konton</th><td>scrypt, HttpOnly-session, spärr efter 5 fel, TOTP RFC 6238</td></tr>
+          <tr><th>Konton</th><td>scrypt, HttpOnly-session, växande väntan vid felförsök, samma svarstid för kända och okända namn, TOTP RFC 6238</td></tr>
           <tr><th>Licens</th><td>Ed25519, 2 av 3 maskinkännetecken. Utgången licens spärrar kommandon, aldrig övervakning.</td></tr>
           <tr><th>Paket</th><td>Ed25519, SBOM CycloneDX, <code>npm audit</code> stoppar bygget, 4 driftberoenden</td></tr>
           <tr><th>Versioner</th><td>Sida vid sida. Tre krascher inom 3 min startar föregående version.</td></tr>
-          <tr><th>CSP</th><td><code>script-src 'self'</code>, <code>object-src 'none'</code></td></tr>
+          <tr><th>CSP</th><td>Skarp som förval: <code>script-src 'self'</code>, <code>object-src 'none'</code></td></tr>
+          <tr><th>Takt</th><td>Gränser på API, inloggning, SMS och anslutningar per adress</td></tr>
           <tr><th>MCP</th><td>JSON-RPC 2.0, sju läsande verktyg, varje anrop journalförs</td></tr>
         </table></div>
       </div>
@@ -1139,14 +1195,14 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
     <div class="sec-head">
       <span class="k">Färdplan</span>
       <h2>Vad som finns och vad som kommer</h2>
-      <p>Spine utvecklas i snabb takt med täta releaser. Aktuell version är 0.139.0.</p>
+      <p>Spine utvecklas i snabb takt med täta releaser. Aktuell version är 0.141.43.</p>
     </div>
     <div class="road">
       <div><h4 style="color:var(--ok)">Finns</h4><ul>
-        <li>Autoskapade punkter och autoplacering</li><li>Kalender, villkor och schemalagd frånkoppling</li><li>Provläge och provplan Q1–Q4</li><li>Personer över flera passersystem</li><li>Notiser med bild: push, Teams, SMS, e-post</li><li>3D-vy av byggnaden</li><li>Detektorhälsa med trend</li><li>Avstämningsrapport mellan export, symboler och ritning</li><li>Konton som bara tar emot notiser</li>
+        <li>Autoskapade punkter och autoplacering</li><li>Kalender, villkor och schemalagd frånkoppling</li><li>Provläge och provplan Q1–Q4</li><li>Personer över flera passersystem</li><li>Notiser med bild: push, Teams, SMS, e-post</li><li>3D-vy av byggnaden</li><li>Detektorhälsa med trend</li><li>Avstämningsrapport mellan export, symboler och ritning</li><li>Konton som bara tar emot notiser</li><li>RCS-meddelanden och larmsida för SMS</li><li>Överfallslarm med delad position</li><li>Linux-server</li><li>Egna roller och glömt lösenord</li><li>Nyckel per drivrutin</li>
       </ul></div>
       <div><h4 style="color:var(--warn)">Pågår</h4><ul>
-        <li>Hanwha Wisenet WAVE</li><li>Securiton SecuriFire och Consilium</li><li>IO-enheter via Modbus</li><li>RCS-meddelanden med knappar</li><li>Köp tid vid larmlagring</li>
+        <li>Hanwha Wisenet WAVE</li><li>Securiton SecuriFire och Consilium</li><li>IO-enheter via Modbus</li><li>Kvittera direkt i RCS</li><li>Köp tid vid larmlagring</li>
       </ul></div>
       <div><h4 style="color:var(--mute)">Planerat</h4><ul>
         <li>AD och Entra ID</li><li>BACnet, Milestone, ONVIF</li><li>Talat utrymningslarm</li><li>Axema, Partnersec, Traka Web</li>
@@ -1172,7 +1228,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 <footer>
   <div class="wrap">
     <span>spine</span>
-    <span class="mono">v0.139.0 · 2026-09-30</span>
+    <span class="mono">v0.141.43 · 2026-10-12</span>
   </div>
 </footer>
 </div>
@@ -1223,7 +1279,7 @@ const I=[
  states:["FireUnit, DisableUnit, FaultUnit","FireZone, FaultZone, DisableZone","IOUnit, StatusIOUnit","Mätvärden: skriv 40065, läs 30065–30072"],
  cmds:[["Tysta","40017, 40019, 40021"],["Återställ tystat","40018, 40020, 40022"],["Återställ allt","40023–40025"],["Frånkoppla / tillkoppla","FC16 40090–40091, resultat i 30091"],["Utgång","FC16 40092–40093, resultat i 30093"]],
  gotchas:["Registren flyttar när enheter läggs till","Kundtexter och händelselogg finns inte i specen"]},
-{id:"hedengren",name:"Hedengren",disc:["fire","emergency","intrusion"],status:"byggd",proto:"Moln · REST",cap:"ypyny",
+{id:"hedengren",name:"Hedengren",disc:["fire","emergency","intrusion"],status:"drift",proto:"Moln · REST",cap:"yyyyy",
  lay:"Firescape brandlarm, Neptolux nödbelysning och HHL inbrott, via Hedengrens moln. Spine läser redan över 2 000 punkter skarpt. Molnet används för överblick, aldrig som livssäkerhetsväg.",
  see:["Brandlarm, fel, frånkoppling, walk-test","Nödljus: lyser, batterifel, batterikapacitet","Inbrott: larm och sabotage","Nedsmutsning per detektor"],
  do:["Frånkoppla sektion med tid","Återställ","Starta batteritest","Ställ ljusstyrka"],
@@ -1247,7 +1303,7 @@ const I=[
  spec:[["Transport","Krypterad TCP, AES-256"],["Riktning","Centralen ringer upp, Spine är mottagare enligt EN 50136"]],
  states:["Händelser i 22 grupper med SIA/CID-koder"],cmds:[["Områden","Till- och frånkoppling"],["Sektioner","inhibit, isolate, restore"]],gotchas:[]},
 {id:"arx",name:"ASSA ARX",disc:["access","intrusion"],status:"drift",proto:"XML/HTTPS · REST",cap:"yyynx",
- lay:"Passersystem med inbrottslarm. Öppna, ställa upp och blockera dörrar fungerar på riktig hårdvara, och personer kan skapas från Spine.",
+ lay:"Passersystem med inbrottslarm. Öppna, ställa upp och blockera dörrar fungerar på riktig hårdvara. Personer kan skapas från Spine, och personadministrationen utvecklas vidare.",
  see:["Dörr öppen, forcerad, öppen för länge","Uppställd, blockerad, låste inte","Inbrottsområden och sektioner","Personer, kort och behörigheter"],
  do:["Öppna dörr","Ställ upp och häv","Blockera och häv","Skapa och avsluta personer, ge och ta behörigheter"],
  pts:"Ur ARX installationsexport eller direkt ur systemet.",
@@ -1255,8 +1311,8 @@ const I=[
  states:["door_state: NORMAL, FORCED_OPEN, OPEN_TOO_LONG","motor_lock_state: LOCKED, UNLOCKED, FAILED_TO_LOCK","Uppställd och blockerad finns bara som händelser"],
  cmds:[["Öppna","Bekräftas när låset lämnar LOCKED"],["Ställ upp / blockera","Bekräftas av ARX egna händelser"],["Personer","Skapa, avsluta, ge och ta kategorier"]],
  gotchas:["Certifikatkedja med SHA-1, verifieringen stängs aldrig av","Varje begäran syns som inloggning i ARX granskningslogg"]},
-{id:"rco",name:"RCO R-CARD M5",disc:["access"],status:"byggd",proto:"REST · OPC UA",cap:"ypyxx",
- lay:"Passersystem. Spine läser personer och behörigheter från en riktig M5 och styr dörrarnas lägen via OPC UA.",
+{id:"rco",name:"RCO R-CARD M5",disc:["access"],status:"drift",proto:"REST · OPC UA",cap:"yyyxx",
+ lay:"Passersystem. Spine visar och styr dörrarna i en riktig M5 via OPC UA och läser personer och behörigheter. Personadministrationen utvecklas vidare.",
  see:["Dörr öppen, forcerad, olåst, sabotage","Zoner och larmfel","Personer, kort och behörighetsgrupper"],
  do:["Lås upp en stund eller tills vidare","Kort, kort och kod, schema, blockerad","Ge och ta behörighet, spärra kort"],
  pts:"Direkt ur systemet.",
@@ -1369,9 +1425,9 @@ const ST_ORDER=["normal","fire","prealarm","fault","disabled","test","offline","
 document.getElementById("strip").innerHTML=ST_ORDER.map(s=>`<div>${STDEMO[s][1]}<span>${esc(STDEMO[s][0])}</span></div>`).join("")+["Dörr normal","Forcerad","Uppställd","Blockerad"].map((n,i)=>`<div>${STDEMO.door[1][i]}<span>${n}</span></div>`).join("");
 
 /* ——— kanaler, sviter, live ——— */
-const CH=[["Push till telefon","drift","Spine fungerar som app på telefonen och skickar larm direkt."],["Microsoft Teams","drift","Larmkort i en kanal med de viktigaste uppgifterna."],["SMS och MMS","drift","MMS bär bilden från kameran eller ritningen."],["E-post","drift","Med bild inbäddad eller bifogad."],["Webhook","drift","Till valfritt system, med bild."],["RCS","planerad","Rika meddelanden med knapparna Kvittera, Öppna i Spine och Ring."]];
+const CH=[["Push till telefon","drift","Spine fungerar som app på telefonen och skickar larm direkt."],["Microsoft Teams","drift","Larmkort i en kanal med de viktigaste uppgifterna."],["SMS och MMS","drift","MMS bär bilden från kameran eller ritningen."],["E-post","drift","Med bild inbäddad eller bifogad."],["Webhook","drift","Till valfritt system, med bild."],["RCS","drift","Kort med ritning och kamerabild, knappen Öppna i Spine och SMS som reserv."],["Larmsida","drift","SMS-mottagare öppnar larmet med ritning och bild via en länk, utan app."]];
 document.getElementById("chan").innerHTML=CH.map(([n,s,t])=>`<div><h4>${esc(n)}<span class="pill ${s}">${S[s]}</span></h4><p>${esc(t)}</p></div>`).join("");
-const SU=[["hedengren-disciplin",244],["handboken",118],["rco-opc",102],["arx",97],["analys-mcp",96],["brivo-iam",91],["schemablock",85],["discipliner",82],["auth",73],["hedengren-driver",73],["topologi",71],["kamerafonster",62],["provplan",56],["provlage-server",56],["kundpaket",50],["consilium",45],["sakerhetsgranskning",43],["intents",43],["licence",41],["securifire-export",34],["vendor-isolering",33],["paketsignatur",32],["modbus",32],["securifire-modbus",32],["planerat",30],["serverhemligheter",30],["wave-driver",27],["sakerhetskopia",27],["granskning",25],["tls",22],["ritningens-avkodare",19],["csp",14],["north-pin",13]];
+const SU=[["hedengren-disciplin",244],["handboken",153],["rco-opc",110],["arx",127],["analys-mcp",96],["brivo-iam",91],["schemablock",85],["discipliner",82],["auth",85],["hedengren-driver",73],["topologi",71],["kamerafonster",62],["provplan",56],["provlage-server",56],["kundpaket",50],["consilium",45],["sakerhetsgranskning",415],["intents",59],["licence",41],["securifire-export",34],["vendor-isolering",33],["paketsignatur",32],["modbus",32],["securifire-modbus",32],["planerat",30],["serverhemligheter",30],["wave-driver",27],["sakerhetskopia",27],["granskning",35],["tls",22],["ritningens-avkodare",19],["csp",14],["north-pin",13]];
 document.getElementById("suites").innerHTML=SU.map(([n,c])=>`<span>${n}<b>${c}</b></span>`).join("");
 const LIVE=[["efo-1","EFO",36,1],["arx-1","ARX",3,1],["rco-1","RCO",4,1],["hedengren-1","Hedengren",2275,1],["brivo-1","Brivo",3,1],["een-1","Eagle Eye",4,1],["demo-1","Demo",94,1],["secf-1","SecuriFire",2668,0]];
 document.getElementById("live").innerHTML=LIVE.map(([id,f,p,on])=>`<div class="drv ${on?"":"off"}"><b><i></i>${id}</b><small>${f} · ${on?"ansluten":"planerad"}</small><span>${p.toLocaleString("sv-SE")} punkter</span></div>`).join("");

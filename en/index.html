@@ -435,6 +435,8 @@ svg.sym.s-unlocked,svg.sym.s-blocked{color:var(--glow)}
 .itc>p{color:var(--mute);font-size:.92rem}
 .itc .spec th{width:30%}
 @media (max-width:820px){.itgrid{grid-template-columns:minmax(0,1fr)}}
+.newgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-width:900px){.newgrid{grid-template-columns:minmax(0,1fr)}}
 footer{padding-block:3rem;color:var(--dim);font-size:.82rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
 </style>
@@ -604,6 +606,57 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <div class="chan" id="chan" style="grid-template-columns:repeat(2,minmax(0,1fr))"></div>
       </div>
     </div>
+
+    <h3 class="sub">Alarms that get through, even without an app</h3>
+    <div class="newgrid">
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">new</span>
+        <h3>Alarm page for SMS</h3>
+        <p>An alarm SMS ends with a short link. The page shows the alarm, its current state, the floor plan with the device circled and the camera image. No app and no sign-in are needed to view it.</p>
+        <ul class="checks">
+          <li><div>One page per recipient<span>Lives for an hour and shows nothing but the alarm</span></div></li>
+          <li><div>Cannot control anything<span>Commands require signing in to Spine</span></div></li>
+          <li><div>Traceable<span>The journal shows who opened the link</span></div></li>
+        </ul>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">new</span>
+        <h3>RCS messages</h3>
+        <p>The alarm arrives as a card in the phone's normal messaging app: the sender's logo, the floor plan with the device and then the camera image. A button opens the alarm directly in Spine.</p>
+        <ul class="checks">
+          <li><div>Confirmed delivery<span>Spine knows when the message has reached the phone</span></div></li>
+          <li><div>SMS as fallback<span>Phones without RCS get an SMS with a link to the alarm page</span></div></li>
+        </ul>
+        <p class="note">Acknowledging directly from the message is being introduced.</p>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">new</span>
+        <h3>Hold-up alarm with location</h3>
+        <p>When a portable hold-up button triggers, the person carrying it gets a link that shares the phone's location. The location appears on the map and in the alarm, with coordinates to read out to emergency services.</p>
+        <ul class="checks">
+          <li><div>The alarm says who carries the button<span>Its own alarm state, more serious than intrusion</span></div></li>
+          <li><div>Kept only as long as needed<span>Until the alarm is reset, plus one day</span></div></li>
+        </ul>
+        <p class="note">Tested on a real phone: location within 16 metres in seven seconds.</p>
+      </article>
+    </div>
+    <div class="cols mt">
+      <div class="block">
+        <h3>The right alarm, once</h3>
+        <ul class="checks">
+          <li><div>A fire alarm is always sent<span>More detectors in the same fire become a follow-up, not a flood of messages</span></div></li>
+          <li><div>Every escalation is sent<span>Pre-alarm turning into fire, tamper turning into intrusion: new message and new acknowledgement</span></div></li>
+          <li><div>Pre-alarms go as text<span>Short and fast; the image comes with the fire alarm</span></div></li>
+          <li><div>No duplicates<span>A reminder about an unacknowledged alarm is sent once</span></div></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3>Disablement with a double safeguard</h3>
+        <p>Whoever disables a detector states for how long. Spine re-enables it on the minute, and the fire panel gets the same time in its own timer. If Spine or the connection is down when time runs out, the panel re-enables it itself.</p>
+        <h3 style="margin-top:1.6rem">Fast on the phone</h3>
+        <p>The page is stored on the phone. The first start takes around five seconds on a weak connection, the next under a second.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -716,7 +769,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <div class="tscroll"><table class="spec grid">
           <tr><th>Make</th><th>Values</th><th>Status</th></tr>
           <tr><td>Schneider Esmi / EFO</td><td>Contamination 0–100 %, raw value 0–255</td><td><span class="pill drift">in service</span></td></tr>
-          <tr><td>Hedengren Firescape</td><td>Contamination, monthly report</td><td><span class="pill byggd">built</span></td></tr>
+          <tr><td>Hedengren Firescape</td><td>Contamination, monthly report</td><td><span class="pill drift">live</span></td></tr>
           <tr><td>Hedengren Neptolux</td><td>Battery capacity in minutes, temperature</td><td><span class="pill byggd">built</span></td></tr>
           <tr><td>Consilium</td><td>Smoke as % of alarm level, temperature, contamination</td><td><span class="pill byggd">built</span></td></tr>
           <tr><td>Securiton SecuriFire</td><td>Smoke, temperature, CO, contamination, airflow in aspirating pipes</td><td><span class="pill planerad">planned</span></td></tr>
@@ -841,7 +894,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
     <div class="sec-head">
       <span class="k">Architecture</span>
       <h2>One way out of the customer network</h2>
-      <p class="lay">Spine is installed on the customer's premises, on an ordinary Windows server. The small piece of software at each panel dials out to the server. That is why no ports need to be opened inbound to the panels' network, which most IT departments require.</p>
+      <p class="lay">Spine is installed on the customer's premises, on an ordinary Windows or Linux server. The small piece of software at each panel dials out to the server. That is why no ports need to be opened inbound to the panels' network, which most IT departments require.</p>
       <p class="tech">The same code runs on one machine or split. Only the driver configuration differs. On-prem is primary and Spine can run entirely without internet.</p>
     </div>
     <div class="flow" role="img" aria-label="Flow: panels, driver, server, users">
@@ -867,7 +920,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <h3>The north link</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Transport</th><td><code>ws://</code> or <code>wss://</code>, the driver initiates, full resync on every reconnect</td></tr>
-          <tr><th>Authentication</th><td>Shared token, compared in constant time. An allowlist of known drivers can be switched on.</td></tr>
+          <tr><th>Authentication</th><td>A key of its own per driver and per machine, can be made mandatory. A new key closes the old connection.</td></tr>
           <tr><th>Key pinning</th><td><code>north.pin</code>: pinned, first, off, plaintext</td></tr>
           <tr><th>Public addresses</th><td>Unencrypted <code>ws://</code> is refused towards public addresses</td></tr>
           <tr><th>Rate per socket</th><td>Driver 2 000 frames/s (burst 8 000), client 100/s, 600 ms CPU/s, max 16 MiB per frame</td></tr>
@@ -920,9 +973,9 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <div class="block">
         <h3>Applies to all sizes</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Operating system</th><td>Windows Server x64. Runs as a Windows service.</td></tr>
+          <tr><th>Operating system</th><td>Windows Server x64 or Linux x64 (Ubuntu 24.04 LTS). Runs as a service.</td></tr>
           <tr><th>Database</th><td>None. A backup is a copy of a folder.</td></tr>
-          <tr><th>Driver machine</th><td>Any Windows computer on the panel's network, about 100 MB memory per driver. Needs no licence of its own.</td></tr>
+          <tr><th>Driver machine</th><td>Any Windows or Linux computer on the panel's network, about 100 MB memory per driver. Needs no licence of its own.</td></tr>
           <tr><th>Clients</th><td>Browser on a computer, wall screen or phone</td></tr>
           <tr><th>Journal</th><td>About 150 MB for 13 months at 2 000 events per day</td></tr>
           <tr><th>Redundancy</th><td>Through virtualisation: the server moves between hosts. Active/active clustering is not yet supported.</td></tr>
@@ -938,7 +991,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
           <tr><th><code>18079</code></th><td>Control port, loopback only</td></tr>
           <tr><th>Memory</th><td>~100 MB + 10 MB per 1 000 points at idle, double at peak</td></tr>
           <tr><th>In service</th><td>2 415 points, 7 drivers: 145 MB flat over 8 h, event loop p95 27 ms</td></tr>
-          <tr><th>Packages</th><td>Server ~66 MB with embedded Node 24, driver ~43 MB</td></tr>
+          <tr><th>Packages</th><td>Full package with embedded Node 24. Updates can be delivered as a delta of a few MB.</td></tr>
         </table></div>
       </div>
     </div>
@@ -968,7 +1021,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <article class="itc">
         <h3>Virtualisation and clusters</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Platform</th><td>A standard virtual Windows server, for example on VMware or Hyper-V</td></tr>
+          <tr><th>Platform</th><td>A standard virtual Windows or Linux server, for example on VMware or Hyper-V</td></tr>
           <tr><th>Moves in a cluster</th><td>Supported. The licence follows live migration and restart on another host. Copying the server to a new machine does not work.</td></tr>
           <tr><th>High availability</th><td>Through the hypervisor. Spine runs as one instance; active/active with two servers is not supported yet.</td></tr>
           <tr><th>After a restart</th><td>The service starts by itself, the drivers reconnect and send the full state. Schedules missed during the outage are applied at once.</td></tr>
@@ -982,9 +1035,10 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <div class="tscroll"><table class="spec">
           <tr><th>Accounts</th><td>Local register. Passwords are stored only as scrypt hashes. The session is a random token in an HttpOnly cookie; the file on disk holds only its hash.</td></tr>
           <tr><th>Two-factor</th><td>Authenticator app (TOTP, for example Microsoft Authenticator), SMS code or passkey. Eight backup codes.</td></tr>
+          <tr><th>Forgotten password</th><td>A one-time link to the account's email or mobile. A password change ends all sessions.</td></tr>
           <tr><th>Passkey</th><td>Sign-in with a passkey alone, without a password</td></tr>
           <tr><th>Requirement</th><td>Per account or for the whole installation: none, administrators only, or everyone</td></tr>
-          <tr><th>Lockout</th><td>Five failed attempts lock the address for a while</td></tr>
+          <tr><th>Lockout</th><td>Repeated failed attempts mean an ever longer wait, per account and per address</td></tr>
           <tr><th>Sessions</th><td>End after 12 hours without activity or 30 days, configurable</td></tr>
           <tr><th>Lockdown</th><td>A session or a person can be locked at once, for example under threat</td></tr>
         </table></div>
@@ -1002,7 +1056,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <article class="itc">
         <h3>Permissions</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Per discipline</th><td>View, operate, engineer or administrator, separately for fire, intrusion, access and the rest</td></tr>
+          <tr><th>Per discipline</th><td>View, operate, engineer or administrator, separately for all seven disciplines. Custom roles can be created.</td></tr>
           <tr><th>Management</th><td>Operator, maintenance (floor plans, symbols, drivers) or system owner</td></tr>
           <tr><th>Per building</th><td>An account sees only the buildings it has rights to. Filtered on the server.</td></tr>
           <tr><th>Stations</th><td>Wall screens with a locked view and time-out</td></tr>
@@ -1013,11 +1067,11 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <h3>Encryption, operation and updates</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Encryption</th><td>HTTPS and WSS on the same port. A certificate is created automatically, or yours is used. Drivers pin the server's key.</td></tr>
-          <tr><th>Secrets</th><td>Panel passwords are encrypted with Windows DPAPI, never stored in plain text in the configuration</td></tr>
-          <tr><th>Service</th><td>Windows service that starts without sign-in and restarts on failure</td></tr>
-          <tr><th>Updates</th><td>A signed package is uploaded once, and each machine updates from the server. Nothing is downloaded from the internet.</td></tr>
+          <tr><th>Secrets</th><td>Panel passwords are kept out of the configuration: encrypted with DPAPI on Windows, in a file only the service can read on Linux</td></tr>
+          <tr><th>Service</th><td>Windows service or systemd on Linux. Starts without sign-in and restarts on failure</td></tr>
+          <tr><th>Updates</th><td>A signed package is uploaded once, and each machine updates from the server. Unsigned packages are refused. Nothing is downloaded from the internet.</td></tr>
           <tr><th>Rollback</th><td>Versions sit side by side. A version that fails to start is replaced automatically by the previous one.</td></tr>
-          <tr><th>Data</th><td>Stored locally in ProgramData. No database to operate.</td></tr>
+          <tr><th>Data</th><td>Stored locally on the server. No database to operate.</td></tr>
         </table></div>
       </article>
     </div>
@@ -1032,8 +1086,8 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
       <p>A system that controls fire alarms and doors must not guess. That is why the code is tested in several layers, against real panels and against the vendors' own specifications.</p>
     </div>
     <div class="bign">
-      <div><b>2 200+</b><span>automated checks in the largest test suites</span></div>
-      <div><b>128+</b><span>builds in the register, traceable to every customer</span></div>
+      <div><b>300+</b><span>test files run before every release</span></div>
+      <div><b>16</b><span>rounds of independent review of the full source code</span></div>
       <div><b>6</b><span>real systems tested: fire, access control, cloud</span></div>
       <div><b>0</b><span>known vulnerabilities in the dependencies at build</span></div>
     </div>
@@ -1042,9 +1096,10 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <li><b>Against real panels</b><p>Disable and enable on a real fire alarm panel, doors in real ARX, RCO and Brivo systems, Hedengren against the cloud.</p></li>
         <li><b>All the way to the screen</b><p>Tests run from the panel's file through driver and server all the way to a real browser.</p></li>
         <li><b>Vendor specifications as simulators</b><p>Before a panel is on site, the driver is tested against a simulator built from the vendor's protocol description.</p></li>
+        <li><b>Every way in is checked</b><p>A table lists every way into the server and the permission each one requires. A test reads the code and stops the build if a route lacks its check.</p></li>
         <li><b>Makes are kept apart</b><p>A dedicated test stops the build if something that belongs to only one make ends up in the shared code.</p></li>
         <li><b>Load and capacity</b><p>A rig builds sites of up to 50 000 points and 100 clients and measures every release.</p></li>
-        <li><b>Security reviews</b><p>Recurring reviews of the server, the drivers, the web interface and the packages. An external penetration test is planned for autumn 2026.</p></li>
+        <li><b>Security reviews</b><p>The full source code has been reviewed in 16 rounds by an independent AI reviewer, each round against a new version. Five penetration tests have been run against a live server with accounts at every level. More than 180 findings are fixed, each with a test. An external independent review is being prepared.</p></li>
       </ul>
       <div class="block">
         <h3>Rules that apply to all code</h3>
@@ -1079,7 +1134,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <p>The regulation requires secure development, vulnerability handling and security updates throughout the product's lifetime.</p>
         <ul class="checks">
           <li><div>Bill of materials in every package<span>An SBOM in CycloneDX format lists all components</span></div></li>
-          <li><div>Signed updates<span>Two keys, checked on the machine doing the install</span></div></li>
+          <li><div>Signed updates<span>Two keys, checked on the machine doing the install. Unsigned is refused</span></div></li>
           <li><div>10 years of security updates<span>The support period is stated in the product</span></div></li>
           <li><div>Updates are never blocked by the licence<span>An expired licence does not stop a security update</span></div></li>
           <li><div>Contact route for vulnerabilities<span>security.txt and SECURITY.md in every installation</span></div></li>
@@ -1111,7 +1166,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <h3>Sign-in and permissions</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Two-factor sign-in</th><td>Code in app, SMS code, passkey and backup codes</td></tr>
-          <tr><th>Roles</th><td>Per discipline: read, operate, technician, administrator</td></tr>
+          <tr><th>Roles</th><td>Per discipline: read, operate, technician, administrator, or custom roles</td></tr>
           <tr><th>Per building</th><td>The operator only sees the buildings they are authorised for</td></tr>
           <tr><th>Management</th><td>Separate day-to-day operation (floor plans, symbols) from system responsibility</td></tr>
           <tr><th>Licence</th><td>Works fully offline. Moves with a migration, but cannot be cloned.</td></tr>
@@ -1121,11 +1176,12 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <span class="techtag">Technical</span>
         <h3>Security in detail</h3>
         <div class="tscroll"><table class="spec">
-          <tr><th>Accounts</th><td>scrypt, HttpOnly session, lockout after 5 failures, TOTP RFC 6238</td></tr>
+          <tr><th>Accounts</th><td>scrypt, HttpOnly session, growing delay on failed attempts, same response time for known and unknown names, TOTP RFC 6238</td></tr>
           <tr><th>Licence</th><td>Ed25519, 2 of 3 machine identifiers. An expired licence blocks commands, never monitoring.</td></tr>
           <tr><th>Packages</th><td>Ed25519, SBOM CycloneDX, <code>npm audit</code> stops the build, 4 runtime dependencies</td></tr>
           <tr><th>Versions</th><td>Side by side. Three crashes within 3 min start the previous version.</td></tr>
-          <tr><th>CSP</th><td><code>script-src 'self'</code>, <code>object-src 'none'</code></td></tr>
+          <tr><th>CSP</th><td>Strict by default: <code>script-src 'self'</code>, <code>object-src 'none'</code></td></tr>
+          <tr><th>Rate limits</th><td>Limits on the API, sign-in, SMS and connections per address</td></tr>
           <tr><th>MCP</th><td>JSON-RPC 2.0, seven read-only tools, every call is journalled</td></tr>
         </table></div>
       </div>
@@ -1143,10 +1199,10 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
     </div>
     <div class="road">
       <div><h4 style="color:var(--ok)">Available</h4><ul>
-        <li>Auto-created points and auto-placement</li><li>Calendar, conditions and scheduled disablement</li><li>Test mode and Q1–Q4 test plan</li><li>People across several access control systems</li><li>Notifications with images: push, Teams, SMS, email</li><li>3D view of the building</li><li>Detector health with trend</li><li>Reconciliation report between export, symbols and drawing</li><li>Notification-only accounts</li>
+        <li>Auto-created points and auto-placement</li><li>Calendar, conditions and scheduled disablement</li><li>Test mode and Q1–Q4 test plan</li><li>People across several access control systems</li><li>Notifications with images: push, Teams, SMS, email</li><li>3D view of the building</li><li>Detector health with trend</li><li>Reconciliation report between export, symbols and drawing</li><li>Notification-only accounts</li><li>RCS messages and alarm page for SMS</li><li>Hold-up alarm with shared location</li><li>Linux server</li><li>Custom roles and forgotten password</li><li>A key per driver</li>
       </ul></div>
       <div><h4 style="color:var(--warn)">In progress</h4><ul>
-        <li>Hanwha Wisenet WAVE</li><li>Securiton SecuriFire and Consilium</li><li>IO units via Modbus</li><li>RCS messages with buttons</li><li>Buy time during alarm delay</li>
+        <li>Hanwha Wisenet WAVE</li><li>Securiton SecuriFire and Consilium</li><li>IO units via Modbus</li><li>Acknowledge directly in RCS</li><li>Buy time during alarm delay</li>
       </ul></div>
       <div><h4 style="color:var(--mute)">Planned</h4><ul>
         <li>AD and Entra ID</li><li>BACnet, Milestone, ONVIF</li><li>Voice evacuation</li><li>Axema, Partnersec, Traka Web</li>
@@ -1172,7 +1228,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 <footer>
   <div class="wrap">
     <span>spine</span>
-    <span class="mono">v0.139.0 · 2026-09-30</span>
+    <span class="mono">v0.141.43 · 2026-10-12</span>
   </div>
 </footer>
 </div>
@@ -1223,7 +1279,7 @@ const I=[
  states:["FireUnit, DisableUnit, FaultUnit","FireZone, FaultZone, DisableZone","IOUnit, StatusIOUnit","Measured values: write 40065, read 30065–30072"],
  cmds:[["Silence","40017, 40019, 40021"],["Reset silenced","40018, 40020, 40022"],["Reset all","40023–40025"],["Disable / enable","FC16 40090–40091, result in 30091"],["Output","FC16 40092–40093, result in 30093"]],
  gotchas:["The registers move when units are added","Customer texts and event log are not in the spec"]},
-{id:"hedengren",name:"Hedengren",disc:["fire","emergency","intrusion"],status:"byggd",proto:"Cloud · REST",cap:"ypyny",
+{id:"hedengren",name:"Hedengren",disc:["fire","emergency","intrusion"],status:"drift",proto:"Cloud · REST",cap:"yyyyy",
  lay:"Firescape fire alarm, Neptolux emergency lighting and HHL intrusion, via Hedengren's cloud. Spine already reads over 2 000 points live. The cloud is used for overview, never as a life-safety path.",
  see:["Fire alarm, fault, disablement, walk test","Emergency lighting: lit, battery fault, battery capacity","Intrusion: alarm and tamper","Contamination per detector"],
  do:["Disable a section for a set time","Reset","Start battery test","Set brightness"],
@@ -1247,7 +1303,7 @@ const I=[
  spec:[["Transport","Encrypted TCP, AES-256"],["Direction","The panel calls in, Spine is the receiver to EN 50136"]],
  states:["Events in 22 groups with SIA/CID codes"],cmds:[["Areas","Setting and unsetting"],["Zones","inhibit, isolate, restore"]],gotchas:[]},
 {id:"arx",name:"ASSA ARX",disc:["access","intrusion"],status:"drift",proto:"XML/HTTPS · REST",cap:"yyynx",
- lay:"Access control system with intrusion alarm. Opening doors, holding them open and blocking them works on real hardware, and people can be created from Spine.",
+ lay:"Access control system with intrusion alarm. Opening doors, holding them open and blocking them works on real hardware. People can be created from Spine, and people administration is being developed further.",
  see:["Door open, forced, open too long","Held open, blocked, failed to lock","Intrusion areas and zones","People, cards and permissions"],
  do:["Open door","Hold open and release","Block and unblock","Create and end people, grant and revoke permissions"],
  pts:"From the ARX installation export or directly from the system.",
@@ -1255,8 +1311,8 @@ const I=[
  states:["door_state: NORMAL, FORCED_OPEN, OPEN_TOO_LONG","motor_lock_state: LOCKED, UNLOCKED, FAILED_TO_LOCK","Held open and blocked exist only as events"],
  cmds:[["Open","Confirmed when the lock leaves LOCKED"],["Hold open / block","Confirmed by ARX's own events"],["People","Create, end, grant and revoke categories"]],
  gotchas:["Certificate chain with SHA-1, verification is never switched off","Every request shows up as a sign-in in the ARX audit log"]},
-{id:"rco",name:"RCO R-CARD M5",disc:["access"],status:"byggd",proto:"REST · OPC UA",cap:"ypyxx",
- lay:"Access control system. Spine reads people and permissions from a real M5 and controls the door modes via OPC UA.",
+{id:"rco",name:"RCO R-CARD M5",disc:["access"],status:"drift",proto:"REST · OPC UA",cap:"yyyxx",
+ lay:"Access control system. Spine shows and controls the doors in a real M5 via OPC UA and reads people and permissions. People administration is being developed further.",
  see:["Door open, forced, unlocked, tamper","Zones and alarm faults","People, cards and access groups"],
  do:["Unlock for a while or until further notice","Card, card and PIN, schedule, blocked","Grant and revoke permission, block card"],
  pts:"Directly from the system.",
@@ -1369,9 +1425,9 @@ const ST_ORDER=["normal","fire","prealarm","fault","disabled","test","offline","
 document.getElementById("strip").innerHTML=ST_ORDER.map(s=>`<div>${STDEMO[s][1]}<span>${esc(STDEMO[s][0])}</span></div>`).join("")+["Door normal","Forced","Held open","Blocked"].map((n,i)=>`<div>${STDEMO.door[1][i]}<span>${n}</span></div>`).join("");
 
 /* ——— channels, suites, live ——— */
-const CH=[["Push to phone","drift","Spine works as an app on the phone and sends alarms directly."],["Microsoft Teams","drift","Alarm card in a channel with the key details."],["SMS and MMS","drift","MMS carries the image from the camera or the floor plan."],["Email","drift","With the image embedded or attached."],["Webhook","drift","To any system, with image."],["RCS","planerad","Rich messages with the buttons Acknowledge, Open in Spine and Call."]];
+const CH=[["Push to phone","drift","Spine works as an app on the phone and sends alarms directly."],["Microsoft Teams","drift","Alarm card in a channel with the key details."],["SMS and MMS","drift","MMS carries the image from the camera or the floor plan."],["Email","drift","With the image embedded or attached."],["Webhook","drift","To any system, with image."],["RCS","drift","A card with floor plan and camera image, an Open in Spine button and SMS as fallback."],["Alarm page","drift","SMS recipients open the alarm with floor plan and image through a link, no app needed."]];
 document.getElementById("chan").innerHTML=CH.map(([n,s,t])=>`<div><h4>${esc(n)}<span class="pill ${s}">${S[s]}</span></h4><p>${esc(t)}</p></div>`).join("");
-const SU=[["hedengren-disciplin",244],["handboken",118],["rco-opc",102],["arx",97],["analys-mcp",96],["brivo-iam",91],["schemablock",85],["discipliner",82],["auth",73],["hedengren-driver",73],["topologi",71],["kamerafonster",62],["provplan",56],["provlage-server",56],["kundpaket",50],["consilium",45],["sakerhetsgranskning",43],["intents",43],["licence",41],["securifire-export",34],["vendor-isolering",33],["paketsignatur",32],["modbus",32],["securifire-modbus",32],["planerat",30],["serverhemligheter",30],["wave-driver",27],["sakerhetskopia",27],["granskning",25],["tls",22],["ritningens-avkodare",19],["csp",14],["north-pin",13]];
+const SU=[["hedengren-disciplin",244],["handboken",153],["rco-opc",110],["arx",127],["analys-mcp",96],["brivo-iam",91],["schemablock",85],["discipliner",82],["auth",85],["hedengren-driver",73],["topologi",71],["kamerafonster",62],["provplan",56],["provlage-server",56],["kundpaket",50],["consilium",45],["sakerhetsgranskning",415],["intents",59],["licence",41],["securifire-export",34],["vendor-isolering",33],["paketsignatur",32],["modbus",32],["securifire-modbus",32],["planerat",30],["serverhemligheter",30],["wave-driver",27],["sakerhetskopia",27],["granskning",35],["tls",22],["ritningens-avkodare",19],["csp",14],["north-pin",13]];
 document.getElementById("suites").innerHTML=SU.map(([n,c])=>`<span>${n}<b>${c}</b></span>`).join("");
 const LIVE=[["efo-1","EFO",36,1],["arx-1","ARX",3,1],["rco-1","RCO",4,1],["hedengren-1","Hedengren",2275,1],["brivo-1","Brivo",3,1],["een-1","Eagle Eye",4,1],["demo-1","Demo",94,1],["secf-1","SecuriFire",2668,0]];
 document.getElementById("live").innerHTML=LIVE.map(([id,f,p,on])=>`<div class="drv ${on?"":"off"}"><b><i></i>${id}</b><small>${f} · ${on?"connected":"planned"}</small><span>${p.toLocaleString("en-GB")} points</span></div>`).join("");
