@@ -718,6 +718,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <h3>Rapporter och trender</h3>
         <p>Spara egna rapportmallar med valda kolumner och filter. Rapporten över smutsiga detektorer visar de värsta först. Trender stegas bakåt genom hela historiken och jämförs alltid med perioden före.</p>
       </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">ny</span>
+        <h3>Underritningar</h3>
+        <p>Ett plan kan ha egna detaljritningar, till exempel ett teknikrum eller en aspirerande detektor, i upp till fem nivåer. En länksymbol på planet öppnar underritningen och lyser i larmfärg när något där larmar.</p>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">ny</span>
+        <h3>Anpassad för surfplattan</h3>
+        <p>Menyer och larmrad anpassar sig till skärmar mellan telefon och dator, så hela vyn får plats på en surfplatta på vägg eller i handen.</p>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">ny</span>
+        <h3>Säger varför något är nere</h3>
+        <p>En drivrutin som inte svarar visar orsaken och när nästa försök görs. En kvittens räknas en gång, även om någon trycker igen på en svag uppkoppling.</p>
+      </article>
     </div>
     <p style="color:var(--mute);max-width:46rem;margin-top:1.6rem">Samma ord för samma sak, oavsett fabrikat. Spine har ett gemensamt ordförråd på svenska och engelska, och leverantörens eget ord visas i andra hand. En upplåst dörr heter likadant i alla passersystem.</p>
   </div>
@@ -789,6 +804,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
           <li><div>PDF till kunden<span>Avvikelserna grupperade per status</span></div></li>
           <li><div>Varje körning sparas som revision<span>Nästa genomgång visar vad som är nytt, vad som står kvar och vad teknikern har åtgärdat</span></div></li>
           <li><div>Placeringsöversikt per central<span>Placerade av totalt, per hus, punkter utan symbol och etiketter utan punkt</span></div></li>
+          <li><div>Okänd modell ritas ändå<span>Som ett generiskt don för disciplinen, märkt tills rätt symbol är satt</span></div></li>
           <li><div>Ingenting rättas automatiskt<span>En symbol kopplad till fel punkt skulle visa en brand i fel korridor, så varje rad är ett förslag till en människa</span></div></li>
         </ul>
         <p class="note tech">Ritningens text läses i webbläsaren med samma läsning som autoplaceringen. Blad utan textlager står som ej lästa, aldrig som OK. De senaste 8 revisionerna sparas. Kräver förvaltningsnivå underhåll.</p>
@@ -985,7 +1001,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <h3>Nordlänken</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Transport</th><td><code>ws://</code> eller <code>wss://</code>, drivrutinen initierar, full resync vid varje återanslutning</td></tr>
-          <tr><th>Autentisering</th><td>Egen nyckel per drivrutin och per maskin, kan göras obligatorisk. En ny nyckel stänger den gamla anslutningen.</td></tr>
+          <tr><th>Autentisering</th><td>Egen nyckel per drivrutin och per maskin, kan göras obligatorisk. För drivrutiner på serverns egen maskin utfärdas den med ett klick. En ny nyckel stänger den gamla anslutningen.</td></tr>
           <tr><th>Nyckelnålning</th><td><code>north.pin</code>: pinnad, först, av, klartext</td></tr>
           <tr><th>Publika adresser</th><td>Okrypterad <code>ws://</code> vägras mot publika adresser</td></tr>
           <tr><th>Takt per socket</th><td>Drivrutin 2 000 ramar/s (skur 8 000), klient 100/s, 600 ms CPU/s, max 16 MiB per ram</td></tr>
@@ -1104,7 +1120,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
           <tr><th>Passkey</th><td>Inloggning med enbart passkey, utan lösenord</td></tr>
           <tr><th>Krav</th><td>Per konto eller för hela installationen: ingen, bara förvaltare, eller alla</td></tr>
           <tr><th>Spärr</th><td>Fem fel i rad spärrar kontot i 15 minuter, båda valbara. Försöken ger ett intrångslarm som kan gå som notis. Okända namn får samma svar som spärrade</td></tr>
-          <tr><th>Sessioner</th><td>Avslutas efter 12 timmar utan aktivitet eller 30 dygn, inställbart</td></tr>
+          <tr><th>Sessioner</th><td>Avslutas efter en inställbar tomgångstid (förval 12 timmar) eller en maxlängd (förval 30 dygn)</td></tr>
           <tr><th>Nedlåsning</th><td>En session eller en person kan låsas direkt, till exempel vid hot</td></tr>
         </table></div>
       </article>
@@ -1148,6 +1164,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
           <li><div>Börjar i torrläge<span>Visar vad den skulle ha spärrat innan den spärrar på riktigt</span></div></li>
           <li><div>Tidsbegränsade spärrar<span>Tiden fördubblas för den som kommer tillbaka. Allt står i journalen.</span></div></li>
           <li><div>Installeras med ett klick<span>Laddas ner färdigkonfigurerad ur inställningarna, för Windows och Linux</span></div></li>
+          <li><div>Säkerhetsnät som inte går att stänga av<span>Lokala adresser spärras aldrig, en adress som nyss loggat in rätt i Spine skyddas, och en stoppfil häver alla spärrar direkt</span></div></li>
         </ul>
       </article>
       <article class="itc">
@@ -1168,7 +1185,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
     </div>
     <div class="bign">
       <div><b>340+</b><span>provfiler som körs före varje utgåva</span></div>
-      <div><b>23</b><span>granskningsomgångar: källkoden och penetrationstester</span></div>
+      <div><b>24</b><span>granskningsomgångar: källkoden och penetrationstester</span></div>
       <div><b>6</b><span>riktiga system provade: brand, passage, moln</span></div>
       <div><b>0</b><span>kända sårbarheter i beroendena vid bygge</span></div>
     </div>
@@ -1181,7 +1198,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <li><b>Varje väg in kontrolleras</b><p>En tabell listar alla vägar in i servern och vilken behörighet var och en kräver. Ett prov läser koden och stoppar bygget om en väg saknar sin kontroll.</p></li>
         <li><b>Fabrikaten hålls isär</b><p>Ett eget prov stoppar bygget om något som bara hör till ett fabrikat hamnar i den gemensamma koden.</p></li>
         <li><b>Last och kapacitet</b><p>En rigg bygger anläggningar upp till 50 000 punkter och 100 klienter och mäter varje release.</p></li>
-        <li><b>Säkerhetsgranskningar</b><p>Spine har gått igenom 23 granskningsomgångar: 16 genomgångar av hela källkoden av en oberoende AI-granskare och 7 penetrationstester mot en körande server med konton på alla nivåer. Över 190 fynd är rättade, vart och ett med ett prov som faller utan rättningen. De senaste testerna fann inget kritiskt och inget högt. En extern oberoende granskning förbereds.</p></li>
+        <li><b>Säkerhetsgranskningar</b><p>Spine har gått igenom 24 granskningsomgångar: 16 genomgångar av hela källkoden av en oberoende AI-granskare och 8 penetrationstester mot en körande server med konton på alla nivåer. Över 190 fynd är rättade, vart och ett med ett prov som faller utan rättningen. De senaste testerna fann inget kritiskt och inget högt. En extern oberoende granskning förbereds.</p></li>
       </ul>
       <div class="block">
         <h3>Regler som gäller all kod</h3>
@@ -1277,11 +1294,11 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
     <div class="sec-head">
       <span class="k">Färdplan</span>
       <h2>Vad som finns och vad som kommer</h2>
-      <p>Spine utvecklas i snabb takt med täta releaser. Aktuell version är 0.141.65.</p>
+      <p>Spine utvecklas i snabb takt med täta releaser. Aktuell version är 0.141.69.</p>
     </div>
     <div class="road">
       <div><h4 style="color:var(--ok)">Finns</h4><ul>
-        <li>Autoskapade punkter och autoplacering</li><li>Kalender, villkor och schemalagd frånkoppling</li><li>Provläge och provplan Q1–Q4</li><li>Personer över flera passersystem</li><li>Notiser med bild: push, Teams, SMS, e-post</li><li>3D-vy av byggnaden</li><li>Detektorhälsa med trend</li><li>Avstämningsrapport mellan export, symboler och ritning</li><li>Konton som bara tar emot notiser</li><li>RCS-meddelanden och larmsida för SMS</li><li>Överfallslarm med delad position</li><li>Linux-server</li><li>Egna roller och glömt lösenord</li><li>Nyckel per drivrutin</li><li>Larmprioritet 1–5 och flerval</li><li>Egna dashboards och väggläge</li><li>Villkor och kalenderposter på ritningen</li><li>Egna symboler och startvyer</li><li>Rapportmallar och trender bakåt</li><li>Kontospärr och intrångslarm</li><li>Servervakt</li><li>Bevakning av notiskanaler</li><li>Gemensamt ordförråd för alla fabrikat</li>
+        <li>Autoskapade punkter och autoplacering</li><li>Kalender, villkor och schemalagd frånkoppling</li><li>Provläge och provplan Q1–Q4</li><li>Personer över flera passersystem</li><li>Notiser med bild: push, Teams, SMS, e-post</li><li>3D-vy av byggnaden</li><li>Detektorhälsa med trend</li><li>Avstämningsrapport mellan export, symboler och ritning</li><li>Konton som bara tar emot notiser</li><li>RCS-meddelanden och larmsida för SMS</li><li>Överfallslarm med delad position</li><li>Linux-server</li><li>Egna roller och glömt lösenord</li><li>Nyckel per drivrutin</li><li>Larmprioritet 1–5 och flerval</li><li>Egna dashboards och väggläge</li><li>Villkor och kalenderposter på ritningen</li><li>Egna symboler och startvyer</li><li>Rapportmallar och trender bakåt</li><li>Kontospärr och intrångslarm</li><li>Servervakt</li><li>Bevakning av notiskanaler</li><li>Gemensamt ordförråd för alla fabrikat</li><li>Underritningar i fem nivåer</li><li>Layout för surfplatta</li>
       </ul></div>
       <div><h4 style="color:var(--warn)">Pågår</h4><ul>
         <li>Hanwha Wisenet WAVE</li><li>Securiton SecuriFire och Consilium</li><li>IO-enheter via Modbus</li><li>Kvittera direkt i RCS</li><li>Köp tid vid larmlagring</li>
@@ -1310,7 +1327,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 <footer>
   <div class="wrap">
     <span>spine</span>
-    <span class="mono">v0.141.65 · 2026-10-24</span>
+    <span class="mono">v0.141.69 · 2026-10-25</span>
   </div>
 </footer>
 </div>

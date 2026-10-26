@@ -718,6 +718,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <h3>Reports and trends</h3>
         <p>Save your own report templates with chosen columns and filters. The report of contaminated detectors shows the worst first. Trends step back through the whole history and are always compared with the period before.</p>
       </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">new</span>
+        <h3>Sub-drawings</h3>
+        <p>A floor can have its own detail drawings, for example a plant room or an aspirating detector, up to five levels deep. A link symbol on the floor opens the sub-drawing and lights up in alarm colour when something there is in alarm.</p>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">new</span>
+        <h3>Made for tablets</h3>
+        <p>Menus and the alarm bar adapt to screens between phone and desktop, so the whole view fits on a tablet on the wall or in the hand.</p>
+      </article>
+      <article class="itc">
+        <span class="pill drift" style="justify-self:start">new</span>
+        <h3>Says why something is down</h3>
+        <p>A driver that does not respond shows the cause and when the next attempt is made. An acknowledgement counts once, even if someone taps again on a weak connection.</p>
+      </article>
     </div>
     <p style="color:var(--mute);max-width:46rem;margin-top:1.6rem">The same word for the same thing, whatever the make. Spine has a shared vocabulary in Swedish and English, with the vendor's own term shown second. An unlocked door has the same name in every access control system.</p>
   </div>
@@ -789,6 +804,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
           <li><div>PDF for the customer<span>Discrepancies grouped by status</span></div></li>
           <li><div>Every run is saved as a revision<span>The next review shows what is new, what remains and what the technician has fixed</span></div></li>
           <li><div>Placement overview per panel<span>Placed out of total, per building, points without a symbol and labels without a point</span></div></li>
+          <li><div>Unknown models are still drawn<span>As a generic device for the discipline, marked until the right symbol is set</span></div></li>
           <li><div>Nothing is corrected automatically<span>A symbol linked to the wrong point would show a fire in the wrong corridor, so every row is a suggestion for a person</span></div></li>
         </ul>
         <p class="note tech">The drawing text is read in the browser with the same reading as auto-placement. Sheets without a text layer show as not read, never as OK. The last 8 revisions are kept. Requires the maintenance level.</p>
@@ -985,7 +1001,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
         <h3>The north link</h3>
         <div class="tscroll"><table class="spec">
           <tr><th>Transport</th><td><code>ws://</code> or <code>wss://</code>, the driver initiates, full resync on every reconnect</td></tr>
-          <tr><th>Authentication</th><td>A key of its own per driver and per machine, can be made mandatory. A new key closes the old connection.</td></tr>
+          <tr><th>Authentication</th><td>A key of its own per driver and per machine, can be made mandatory. For drivers on the server's own machine it is issued with one click. A new key closes the old connection.</td></tr>
           <tr><th>Key pinning</th><td><code>north.pin</code>: pinned, first, off, plaintext</td></tr>
           <tr><th>Public addresses</th><td>Unencrypted <code>ws://</code> is refused towards public addresses</td></tr>
           <tr><th>Rate per socket</th><td>Driver 2 000 frames/s (burst 8 000), client 100/s, 600 ms CPU/s, max 16 MiB per frame</td></tr>
@@ -1104,7 +1120,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
           <tr><th>Passkey</th><td>Sign-in with a passkey alone, without a password</td></tr>
           <tr><th>Requirement</th><td>Per account or for the whole installation: none, administrators only, or everyone</td></tr>
           <tr><th>Lockout</th><td>Five failures in a row lock the account for 15 minutes, both configurable. The attempts raise an intrusion alarm that can go out as a notification. Unknown names get the same answer as locked ones</td></tr>
-          <tr><th>Sessions</th><td>End after 12 hours without activity or 30 days, configurable</td></tr>
+          <tr><th>Sessions</th><td>End after a configurable idle time (default 12 hours) or a maximum length (default 30 days)</td></tr>
           <tr><th>Lockdown</th><td>A session or a person can be locked at once, for example under threat</td></tr>
         </table></div>
       </article>
@@ -1148,6 +1164,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
           <li><div>Starts in dry-run mode<span>Shows what it would have blocked before it blocks for real</span></div></li>
           <li><div>Time-limited blocks<span>The time doubles for anyone who comes back. Everything is in the journal.</span></div></li>
           <li><div>Installs with one click<span>Downloaded pre-configured from the settings, for Windows and Linux</span></div></li>
+          <li><div>Safety nets that cannot be switched off<span>Local addresses are never blocked, an address that has just signed in correctly to Spine is protected, and a stop file lifts all blocks at once</span></div></li>
         </ul>
       </article>
       <article class="itc">
@@ -1168,7 +1185,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
     </div>
     <div class="bign">
       <div><b>340+</b><span>test files run before every release</span></div>
-      <div><b>23</b><span>review rounds: source code and penetration tests</span></div>
+      <div><b>24</b><span>review rounds: source code and penetration tests</span></div>
       <div><b>6</b><span>real systems tested: fire, access control, cloud</span></div>
       <div><b>0</b><span>known vulnerabilities in the dependencies at build</span></div>
     </div>
@@ -1181,7 +1198,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
         <li><b>Every way in is checked</b><p>A table lists every way into the server and the permission each one requires. A test reads the code and stops the build if a route lacks its check.</p></li>
         <li><b>Makes are kept apart</b><p>A dedicated test stops the build if something that belongs to only one make ends up in the shared code.</p></li>
         <li><b>Load and capacity</b><p>A rig builds sites of up to 50 000 points and 100 clients and measures every release.</p></li>
-        <li><b>Security reviews</b><p>Spine has been through 23 review rounds: 16 reviews of the full source code by an independent AI reviewer and 7 penetration tests against a live server with accounts at every level. More than 190 findings are fixed, each with a test that fails without the fix. The latest tests found nothing critical and nothing high. An external independent review is being prepared.</p></li>
+        <li><b>Security reviews</b><p>Spine has been through 24 review rounds: 16 reviews of the full source code by an independent AI reviewer and 8 penetration tests against a live server with accounts at every level. More than 190 findings are fixed, each with a test that fails without the fix. The latest tests found nothing critical and nothing high. An external independent review is being prepared.</p></li>
       </ul>
       <div class="block">
         <h3>Rules that apply to all code</h3>
@@ -1281,7 +1298,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
     </div>
     <div class="road">
       <div><h4 style="color:var(--ok)">Available</h4><ul>
-        <li>Auto-created points and auto-placement</li><li>Calendar, conditions and scheduled disablement</li><li>Test mode and Q1–Q4 test plan</li><li>People across several access control systems</li><li>Notifications with images: push, Teams, SMS, email</li><li>3D view of the building</li><li>Detector health with trend</li><li>Reconciliation report between export, symbols and drawing</li><li>Notification-only accounts</li><li>RCS messages and alarm page for SMS</li><li>Hold-up alarm with shared location</li><li>Linux server</li><li>Custom roles and forgotten password</li><li>A key per driver</li><li>Alarm priority 1–5 and multi-select</li><li>Custom dashboards and wall mode</li><li>Conditions and calendar posts on the floor plan</li><li>Custom symbols and start views</li><li>Report templates and trends back in time</li><li>Account lockout and intrusion alarm</li><li>Server guard</li><li>Monitoring of notification channels</li><li>Shared vocabulary for all makes</li>
+        <li>Auto-created points and auto-placement</li><li>Calendar, conditions and scheduled disablement</li><li>Test mode and Q1–Q4 test plan</li><li>People across several access control systems</li><li>Notifications with images: push, Teams, SMS, email</li><li>3D view of the building</li><li>Detector health with trend</li><li>Reconciliation report between export, symbols and drawing</li><li>Notification-only accounts</li><li>RCS messages and alarm page for SMS</li><li>Hold-up alarm with shared location</li><li>Linux server</li><li>Custom roles and forgotten password</li><li>A key per driver</li><li>Alarm priority 1–5 and multi-select</li><li>Custom dashboards and wall mode</li><li>Conditions and calendar posts on the floor plan</li><li>Custom symbols and start views</li><li>Report templates and trends back in time</li><li>Account lockout and intrusion alarm</li><li>Server guard</li><li>Monitoring of notification channels</li><li>Shared vocabulary for all makes</li><li>Sub-drawings in five levels</li><li>Tablet layout</li>
       </ul></div>
       <div><h4 style="color:var(--warn)">In progress</h4><ul>
         <li>Hanwha Wisenet WAVE</li><li>Securiton SecuriFire and Consilium</li><li>IO units via Modbus</li><li>Acknowledge directly in RCS</li><li>Buy time during alarm delay</li>
@@ -1310,7 +1327,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 <footer>
   <div class="wrap">
     <span>spine</span>
-    <span class="mono">v0.141.65 · 2026-10-24</span>
+    <span class="mono">v0.141.69 · 2026-10-25</span>
   </div>
 </footer>
 </div>
