@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spine-appen – integritet</title>
+<meta name="description" content="Vilka uppgifter Spine-appen för Android hanterar, var de går och vem som ansvarar för dem.">
+<link rel="canonical" href="https://spine.industries/app/integritet/">
+<link rel="alternate" hreflang="sv" href="https://spine.industries/app/integritet/">
+<link rel="alternate" hreflang="en" href="https://spine.industries/en/app/privacy/">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<style>
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:300;font-display:swap;src:url(/assets/fonts/ibm-plex-sans-latin-300-normal.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/ibm-plex-sans-latin-500-normal.woff2) format('woff2')}
+:root{color-scheme:dark;--ink:#03161b;--text:#d8e6e8;--mute:#8fb0b5;--line:rgba(150,196,202,.18);--accent:#5fd3c4}
+html,body{margin:0;background:var(--ink);color:var(--text);font:300 17px/1.6 'IBM Plex Sans',system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:48px 16px 80px}
+h1{font-weight:500;font-size:30px;line-height:1.2;margin:0 0 8px}
+h2{font-weight:500;font-size:20px;margin:40px 0 8px;padding-top:24px;border-top:1px solid var(--line)}
+p,li{color:var(--text)}.mute{color:var(--mute);font-size:15px}
+a{color:var(--accent)}ul{padding-left:20px}li{margin:4px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px solid var(--line);padding:8px 8px 8px 0;text-align:left;vertical-align:top}th{font-weight:500;color:var(--mute)}
+</style>
+</head>
+<body>
+<main>
+<h1>Spine-appen – integritet</h1>
+<p class="mute">Gäller Spine för Android (industries.spine.app). Senast ändrad 30 oktober 2026. <a href="/en/app/privacy/">English</a></p>
+
+<p>Spine-appen är en larm- och styrklient till ett Spine-system. Appen ges ut av Ampano Technologies AB, Sundsvall. Den kopplas till en Spine-server som ägs och drivs av den organisation du använder appen för, till exempel en fastighetsägare eller en larmoperatör. Den organisationen ansvarar för uppgifterna på sin server och för hur länge de sparas.</p>
+<p>Appen har ingen reklam, ingen analys och inga spårare. Inga uppgifter säljs eller lämnas ut för marknadsföring.</p>
+
+<h2>Till din organisations Spine-server</h2>
+<ul>
+<li><b>Inloggning</b> med användarnamn och lösenord, passkey eller fingeravtryck. Fingeravtrycket lämnar aldrig telefonen. Telefonen skickar bara en signatur från en nyckel som ligger i telefonens säkra lagring.</li>
+<li><b>Telefonens anmälan:</b> ett slumpat id för telefonen, tillverkare och modell, appens version, telefonens offentliga nycklar och dess pushadress (en adress från Google som notiserna skickas till). En administratör godkänner telefonen innan den får notiser.</li>
+<li><b>Det du gör i appen</b> (kvittera ett larm, öppna en dörr, koppla ur en sektion) skrivs i systemets journal med ditt namn och telefonens modell, på samma sätt som när du gör det vid en dator.</li>
+<li><b>Position, bara vid snabblarm.</b> Har du själv slagit på snabblarmet och håller in knappen i tre sekunder skickas telefonens position, cirka var 15:e sekund, tills en operatör återställer larmet. Positionen visas för operatörerna och sparas i systemets journal. Appen läser aldrig positionen i något annat läge.</li>
+</ul>
+
+<h2>Via Ampanos pushrelä och Google</h2>
+<ul>
+<li><b>Notiser</b> krypteras av din organisations server så att bara din telefon kan läsa dem (RFC 8291). Ampanos relä och Googles Firebase Cloud Messaging förmedlar dem och ser bara pushadressen, tidpunkten och en krypterad kropp av samma storlek varje gång.</li>
+<li><b>Kvittens från notisen och snabblarm</b> kan gå via reläet när telefonen inte når servern direkt. De är signerade av telefonen, så reläet kan inte ändra dem. De är inte krypterade mot reläet. Reläet kan alltså läsa en kvittenskommentar och, vid snabblarm, positionen. Reläet håller dem i minnet tills servern hämtar dem, högst ett dygn, och skriver dem inte till disk.</li>
+</ul>
+
+<h2>Behörigheter</h2>
+<table>
+<tr><th>Behörighet</th><th>Varför</th></tr>
+<tr><td>Notiser, helskärm, Stör ej</td><td>Brandlarm och andra larm med hög prioritet ska synas och höras även när telefonen är låst eller på ljudlöst. Du väljer per kategori i appen.</td></tr>
+<tr><td>Plats (exakt eller ungefärlig)</td><td>Bara för snabblarm, och bara medan ett snabblarm pågår. Frågan ställs när du slår på snabblarmet.</td></tr>
+<tr><td>Fingeravtryck</td><td>Inloggning och bekräftelse av åtgärder, till exempel att öppna en dörr.</td></tr>
+<tr><td>Förgrundstjänster</td><td>Ett larmljud som går tills du stänger av det, och ett snabblarm som fortsätter skicka när skärmen släcks.</td></tr>
+<tr><td>Start vid omstart</td><td>Ett pågående snabblarm fortsätter efter att telefonen startats om.</td></tr>
+</table>
+
+<h2>Radera</h2>
+<ul>
+<li>Avinstallerar du appen raderas dess nycklar och inställningar från telefonen.</li>
+<li>Telefonen tas bort från Spine av en administratör i din organisation (⚙ › Konton). Kontot och journalen hanteras enligt din organisations regler. Vänd dig dit om du vill få ut eller radera uppgifter om dig.</li>
+</ul>
+
+<h2>Kontakt</h2>
+<p>Ampano Technologies AB, Sundsvall. <a href="mailto:KONTAKT">KONTAKT</a></p>
+</main>
+</body>
+</html>
