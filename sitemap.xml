@@ -2,4 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url><loc>https://spine.industries/</loc><xhtml:link rel="alternate" hreflang="en" href="https://spine.industries/en/"/><xhtml:link rel="alternate" hreflang="sv" href="https://spine.industries/"/></url>
 <url><loc>https://spine.industries/en/</loc><xhtml:link rel="alternate" hreflang="sv" href="https://spine.industries/"/><xhtml:link rel="alternate" hreflang="en" href="https://spine.industries/en/"/></url>
+<url><loc>https://spine.industries/app/integritet/</loc><xhtml:link rel="alternate" hreflang="en" href="https://spine.industries/en/app/privacy/"/><xhtml:link rel="alternate" hreflang="sv" href="https://spine.industries/app/integritet/"/></url>
+<url><loc>https://spine.industries/en/app/privacy/</loc><xhtml:link rel="alternate" hreflang="sv" href="https://spine.industries/app/integritet/"/><xhtml:link rel="alternate" hreflang="en" href="https://spine.industries/en/app/privacy/"/></url>
 </urlset>
