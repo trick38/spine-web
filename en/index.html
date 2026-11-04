@@ -409,6 +409,8 @@ svg.sym.s-unlocked,svg.sym.s-blocked{color:var(--glow)}
 .statestrip span{font-size:.72rem;color:var(--mute);text-align:center;line-height:1.25}
 .lang{flex:none;font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--mute);text-decoration:none;border:1px solid var(--line-2);border-radius:999px;padding:.35rem .7rem}
 .lang:hover{color:var(--fg);border-color:var(--glow)}
+.lang.portal{color:var(--fg);border-color:var(--glow)}
+@media (max-width:520px){.lang.portal{font-size:.68rem;padding:.3rem .55rem}}
 
 .gsrc{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.2rem 0 1.2rem;font-family:var(--mono);font-size:.8rem}
 .gsrc span{padding:.35rem .7rem;border:1px solid var(--line-2);border-radius:999px;background:var(--panel);color:var(--bone)}
@@ -466,6 +468,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-bet
       <button type="button" id="m-enkel" data-m="enkel" aria-pressed="true">Overview</button>
       <button type="button" id="m-teknik" data-m="teknik" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 4 1 8l4 4M11 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Technical</button>
     </div>
+    <a class="lang portal" href="https://partner.spine.industries/" rel="noopener">Partner portal</a>
     <a class="lang" href="../" hreflang="sv" lang="sv">SV</a>
   </div>
 </nav>
@@ -1327,6 +1330,7 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 <footer>
   <div class="wrap">
     <span>spine</span>
+    <a href="https://partner.spine.industries/" rel="noopener" style="color:inherit">Partner portal — downloads, licences and prices for partners and customers</a>
     <span class="mono">v0.141.69 · 2026-10-25</span>
   </div>
 </footer>
