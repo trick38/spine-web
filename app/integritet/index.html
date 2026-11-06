@@ -25,22 +25,24 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 <body>
 <main>
 <h1>Spine-appen – integritet</h1>
-<p class="mute">Gäller Spine för Android (industries.spine.app). Senast ändrad 30 oktober 2026. <a href="/en/app/privacy/">English</a></p>
+<p class="mute">Gäller Spine för Android och iPhone (industries.spine.app). Senast ändrad 6 november 2026. <a href="/en/app/privacy/">English</a></p>
 
 <p>Spine-appen är en larm- och styrklient till ett Spine-system. Appen ges ut av Ampano Technologies AB, Sundsvall. Den kopplas till en Spine-server som ägs och drivs av den organisation du använder appen för, till exempel en fastighetsägare eller en larmoperatör. Den organisationen ansvarar för uppgifterna på sin server och för hur länge de sparas.</p>
 <p>Appen har ingen reklam, ingen analys och inga spårare. Inga uppgifter säljs eller lämnas ut för marknadsföring.</p>
 
 <h2>Till din organisations Spine-server</h2>
 <ul>
-<li><b>Inloggning</b> med användarnamn och lösenord, passkey eller fingeravtryck. Fingeravtrycket lämnar aldrig telefonen. Telefonen skickar bara en signatur från en nyckel som ligger i telefonens säkra lagring.</li>
-<li><b>Telefonens anmälan:</b> ett slumpat id för telefonen, tillverkare och modell, appens version, telefonens offentliga nycklar och dess pushadress (en adress från Google som notiserna skickas till). En administratör godkänner telefonen innan den får notiser.</li>
+<li><b>Inloggning</b> med användarnamn och lösenord, passkey (Android), fingeravtryck eller Face ID. Fingeravtrycket och ansiktet lämnar aldrig telefonen. Telefonen skickar bara en signatur från en nyckel som ligger i telefonens säkra lagring.</li>
+<li><b>Koppling med kod:</b> koden du skannar eller skriver in från Spine på datorn används en gång för att koppla telefonen och logga in den.</li>
+<li><b>Telefonens anmälan:</b> ett slumpat id för telefonen, tillverkare och modell, appens version, telefonens offentliga nycklar och dess pushadress (en adress från Google, och på iPhone från Apple, som notiserna skickas till). En administratör godkänner telefonen innan den får notiser.</li>
 <li><b>Det du gör i appen</b> (kvittera ett larm, öppna en dörr, koppla ur en sektion) skrivs i systemets journal med ditt namn och telefonens modell, på samma sätt som när du gör det vid en dator.</li>
+<li><b>Sökningar.</b> Det du skriver eller säger i Spines sökfält går som en sökning till servern, som visar det ditt konto får se.</li>
 <li><b>Position, bara vid snabblarm.</b> Har du själv slagit på snabblarmet och håller in knappen i tre sekunder skickas telefonens position, cirka var 15:e sekund, tills en operatör återställer larmet. Positionen visas för operatörerna och sparas i systemets journal. Appen läser aldrig positionen i något annat läge.</li>
 </ul>
 
-<h2>Via Ampanos pushrelä och Google</h2>
+<h2>Via Ampanos pushrelä, Google och Apple</h2>
 <ul>
-<li><b>Notiser</b> krypteras av din organisations server så att bara din telefon kan läsa dem (RFC 8291). Ampanos relä och Googles Firebase Cloud Messaging förmedlar dem och ser bara pushadressen, tidpunkten och en krypterad kropp av samma storlek varje gång.</li>
+<li><b>Notiser</b> krypteras av din organisations server så att bara din telefon kan läsa dem (RFC 8291). Ampanos relä och Googles Firebase Cloud Messaging, och på iPhone Apples pushtjänst (APNs), förmedlar dem och ser bara pushadressen, tidpunkten och en krypterad kropp av samma storlek varje gång.</li>
 <li><b>Kvittens från notisen och snabblarm</b> kan gå via reläet när telefonen inte når servern direkt. De är signerade av telefonen, så reläet kan inte ändra dem. De är inte krypterade mot reläet. Reläet kan alltså läsa en kvittenskommentar och, vid snabblarm, positionen. Reläet håller dem i minnet tills servern hämtar dem, högst ett dygn, och skriver dem inte till disk.</li>
 </ul>
 
@@ -49,8 +51,10 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 <tr><th>Behörighet</th><th>Varför</th></tr>
 <tr><td>Notiser, helskärm, Stör ej</td><td>Brandlarm och andra larm med hög prioritet ska synas och höras även när telefonen är låst eller på ljudlöst. Du väljer per kategori i appen.</td></tr>
 <tr><td>Plats (exakt eller ungefärlig)</td><td>Bara för snabblarm, och bara medan ett snabblarm pågår. Frågan ställs när du slår på snabblarmet.</td></tr>
-<tr><td>Fingeravtryck</td><td>Inloggning och bekräftelse av åtgärder, till exempel att öppna en dörr.</td></tr>
-<tr><td>Förgrundstjänster</td><td>Ett larmljud som går tills du stänger av det, och ett snabblarm som fortsätter skicka när skärmen släcks.</td></tr>
+<tr><td>Fingeravtryck och Face ID</td><td>Inloggning och bekräftelse av åtgärder, till exempel att öppna en dörr.</td></tr>
+<tr><td>Kamera</td><td>Bara när du själv skannar koden från datorn för att koppla telefonen. Bilden tolkas i telefonen och sparas inte.</td></tr>
+<tr><td>Mikrofon och taltolkning</td><td>Bara för röstsökningen, och bara medan appens lyssnarfönster syns efter att du själv tryckt på mikrofonen. Talet blir text i telefonen. Inget ljud sparas eller skickas. Texten går som en sökning till din organisations Spine-server, som om du skrivit den.</td></tr>
+<tr><td>Förgrundstjänster (Android), plats i bakgrunden (iPhone)</td><td>Ett larmljud som går tills du stänger av det, och ett snabblarm som fortsätter skicka när skärmen släcks.</td></tr>
 <tr><td>Start vid omstart</td><td>Ett pågående snabblarm fortsätter efter att telefonen startats om.</td></tr>
 </table>
 

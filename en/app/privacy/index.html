@@ -25,22 +25,24 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 <body>
 <main>
 <h1>Spine app – privacy</h1>
-<p class="mute">Applies to Spine for Android (industries.spine.app). Last changed 30 October 2026. <a href="/app/integritet/">Svenska</a></p>
+<p class="mute">Applies to Spine for Android and iPhone (industries.spine.app). Last changed 6 November 2026. <a href="/app/integritet/">Svenska</a></p>
 
 <p>The Spine app is an alarm and control client for a Spine system. It is published by Ampano Technologies AB, Sundsvall, Sweden. It connects to a Spine server owned and operated by the organisation you use the app for, for example a property owner or an alarm operator. That organisation is responsible for the data on its server and for how long it is kept.</p>
 <p>The app has no advertising, no analytics and no trackers. No data is sold or shared for marketing.</p>
 
 <h2>Sent to your organisation's Spine server</h2>
 <ul>
-<li><b>Sign-in</b> with user name and password, a passkey or your fingerprint. Your fingerprint never leaves the phone; the phone only sends a signature made with a key held in the phone's secure storage.</li>
-<li><b>Phone registration:</b> a random ID for the phone, manufacturer and model, app version, the phone's public keys and its push address (an address from Google that notifications are sent to). An administrator approves the phone before it receives notifications.</li>
+<li><b>Sign-in</b> with user name and password, a passkey (Android), your fingerprint or Face ID. Your fingerprint and face never leave the phone; the phone only sends a signature made with a key held in the phone's secure storage.</li>
+<li><b>Pairing code:</b> the code you scan or type from Spine on a computer is used once to connect and sign in the phone.</li>
+<li><b>Phone registration:</b> a random ID for the phone, manufacturer and model, app version, the phone's public keys and its push address (an address from Google, and on iPhone from Apple, that notifications are sent to). An administrator approves the phone before it receives notifications.</li>
 <li><b>What you do in the app</b> (acknowledge an alarm, open a door, disable a zone) is written to the system's log with your name and the phone's model, just as when you do it at a computer.</li>
+<li><b>Searches.</b> What you type or say in Spine's search field is sent as a search to the server, which shows what your account is allowed to see.</li>
 <li><b>Location, only for the hold-up alarm.</b> If you have turned on the hold-up alarm yourself and hold the button for three seconds, the phone's location is sent about every 15 seconds until an operator resets the alarm. Operators see it, and it is kept in the system's log. The app never reads your location otherwise.</li>
 </ul>
 
-<h2>Through Ampano's push relay and Google</h2>
+<h2>Through Ampano's push relay, Google and Apple</h2>
 <ul>
-<li><b>Notifications</b> are encrypted by your organisation's server so that only your phone can read them (RFC 8291). Ampano's relay and Google Firebase Cloud Messaging deliver them and see only the push address, the time and an encrypted body of the same size every time.</li>
+<li><b>Notifications</b> are encrypted by your organisation's server so that only your phone can read them (RFC 8291). Ampano's relay and Google Firebase Cloud Messaging, and on iPhone the Apple Push Notification service (APNs), deliver them and see only the push address, the time and an encrypted body of the same size every time.</li>
 <li><b>Acknowledgements from a notification and hold-up alarms</b> can go through the relay when the phone cannot reach the server directly. They are signed by the phone, so the relay cannot change them. They are not encrypted towards the relay, so the relay can read an acknowledgement comment and, for a hold-up alarm, the location. The relay keeps them in memory until the server collects them, at most one day, and does not write them to disk.</li>
 </ul>
 
@@ -49,8 +51,10 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 <tr><th>Permission</th><th>Why</th></tr>
 <tr><td>Notifications, full screen, Do Not Disturb</td><td>Fire alarms and other high-priority alarms must be seen and heard even when the phone is locked or silent. You choose per category in the app.</td></tr>
 <tr><td>Location (precise or approximate)</td><td>Only for the hold-up alarm, and only while one is active. You are asked when you turn the hold-up alarm on.</td></tr>
-<tr><td>Fingerprint</td><td>Sign-in and confirming actions, such as opening a door.</td></tr>
-<tr><td>Foreground services</td><td>An alarm sound that plays until you turn it off, and a hold-up alarm that keeps sending when the screen is off.</td></tr>
+<tr><td>Fingerprint and Face ID</td><td>Sign-in and confirming actions, such as opening a door.</td></tr>
+<tr><td>Camera</td><td>Only when you scan the code from a computer to connect the phone. The image is interpreted on the phone and not kept.</td></tr>
+<tr><td>Microphone and speech recognition</td><td>Only for voice search, and only while the app's listening window is shown after you tapped the microphone. Speech becomes text on the phone. No audio is stored or sent. The text is sent as a search to your organisation's Spine server, as if you had typed it.</td></tr>
+<tr><td>Foreground services (Android), background location (iPhone)</td><td>An alarm sound that plays until you turn it off, and a hold-up alarm that keeps sending when the screen is off.</td></tr>
 <tr><td>Start after restart</td><td>An active hold-up alarm continues after the phone restarts.</td></tr>
 </table>
 
