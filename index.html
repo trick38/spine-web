@@ -441,6 +441,11 @@ svg.sym.s-unlocked,svg.sym.s-blocked{color:var(--glow)}
 @media (max-width:900px){.newgrid{grid-template-columns:minmax(0,1fr)}}
 footer{padding-block:3rem;color:var(--dim);font-size:.82rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
+footer .sva{display:flex;align-items:center;gap:.5rem;color:var(--dim);text-decoration:none}
+footer .sva b{color:var(--fg);font-weight:500}
+footer .sva-mark{width:1.6em;height:1.35em;flex:none;color:var(--glow)}
+footer .kontakt{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
+footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
 </style>
 
 <div id="app" data-mode="enkel">
@@ -1329,7 +1334,8 @@ agentCmd { <span class="k">reqId</span>, <span class="k">op</span>, <span class=
 
 <footer>
   <div class="wrap">
-    <span>spine</span>
+    <a class="sva" href="https://www.svasystem.se" rel="noopener"><svg class="sva-mark" viewBox="390 520 1035 890" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="172" stroke-linecap="round" stroke-linejoin="round"><path d="M486 966H978M732 720L978 966L732 1212"/></g><g fill="currentColor"><circle cx="978" cy="618" r="86"/><circle cx="1225" cy="719" r="86"/><circle cx="1327" cy="966" r="86"/><circle cx="1225" cy="1213" r="86"/><circle cx="978" cy="1314" r="86"/></g></svg><span>Spine levereras av <b>SVA System</b></span></a>
+    <div class="kontakt"><span>SVA System AB · 556565-6120</span><span>Produktkontakt: <a href="mailto:tomas@svasystem.se">tomas@svasystem.se</a> · <a href="tel:+46723291412">+46 72 32 91 412</a></span><span><a href="mailto:info@svasystem.se">info@svasystem.se</a></span></div>
     <a href="https://partner.spine.industries/" rel="noopener" style="color:inherit">Partnerportal — nedladdningar, licenser och priser för partner och kunder</a>
     <span class="mono">v0.141.69 · 2026-10-25</span>
   </div>
