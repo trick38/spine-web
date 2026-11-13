@@ -257,6 +257,17 @@ section.sec:not(.alt) .metrics div{background:var(--ink)}
 .cap.x{background:none;width:14px;height:2px;border-radius:1px;background:var(--dim)}
 .legend{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;font-size:.8rem;color:var(--mute);margin-top:.9rem}
 .legend span{display:flex;align-items:center;gap:.45rem}
+.phones{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);padding:.2rem 0 1rem;margin:0 calc(-1*var(--gut));padding-inline:var(--gut);scrollbar-width:thin}
+.phones figure{margin:0;flex:0 0 clamp(11rem,22vw,14.5rem);scroll-snap-align:start}
+.phones img{display:block;width:100%;height:auto;aspect-ratio:600/1300;object-fit:cover;object-position:top;border-radius:1.6rem;border:6px solid #1c2226;box-shadow:0 1.2rem 2.4rem rgba(0,0,0,.35);background:#0d1114}
+.phones figcaption{font-size:.82rem;color:var(--mute);margin-top:.7rem;line-height:1.4}
+.phones figcaption b{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glow);font-weight:400;margin-bottom:.2rem}
+.stores{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.6rem 0 0}
+.store{display:inline-flex;flex-direction:column;justify-content:center;min-width:11rem;padding:.6rem 1.1rem;border-radius:.7rem;border:1px solid var(--line,rgba(255,255,255,.18));color:inherit;text-decoration:none;line-height:1.25}
+a.store:hover{border-color:var(--glow)}
+.store small{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.store b{font-weight:500;font-size:1.05rem}
+.store.snart{opacity:.75}
 .pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px;border:1px solid;white-space:nowrap}
 .pill.drift{color:var(--ok);border-color:rgba(79,199,154,.45);background:rgba(79,199,154,.08)}
 .pill.byggd{color:var(--warn);border-color:rgba(233,182,74,.45);background:rgba(233,182,74,.08)}
@@ -459,6 +470,7 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
       <li><a class="l" href="#sa-fungerar">Så fungerar det</a></li>
       <li><a class="l" href="#block">Block</a></li>
       <li><a class="l" href="#larm">Larm</a></li>
+      <li><a class="l" href="#appen">Appen</a></li>
       <li><a class="l" href="#styrning">Styrning</a></li>
       <li><a class="l" href="#autoplacering">Autoplacering</a></li>
       <li><a class="l" href="#discipliner">Symboler</a></li>
@@ -666,6 +678,52 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
         <p>Sidan sparas i telefonen. Första start tar runt fem sekunder på en svag uppkoppling, nästa under en sekund.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- APPEN -->
+<section class="sec alt" id="appen">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="k">Appen</span>
+      <h2>Spine i fickan, för iPhone och Android</h2>
+      <p>Larmen kommer till telefonen och hörs även när den står på ljudlöst. Från samma app kvitterar du, öppnar dörrar och kopplar från detektorer. Appen pratar bara med er egen Spine-server.</p>
+    </div>
+    <div class="phones">
+      <figure><img src="assets/app/android-larm.webp" alt="Android: brandlarm i helskärm över låsskärmen med knapparna Öppna Spine, Kvittera och Stäng av ljudet" loading="lazy" width="600" height="1300"><figcaption><b>Android</b>Brandlarmet tar hela skärmen, också över låsskärmen</figcaption></figure>
+      <figure><img src="assets/app/ios-larm.webp" alt="iPhone: aktivt brandlarm med kamerabild och knapparna Kvittera, Punkten och På ritningen" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>Larmet med kamerabilden, kvittera direkt</figcaption></figure>
+      <figure><img src="assets/app/ios-dorr.webp" alt="iPhone: en dörr med knapparna Öppna momentant, Ställ upp dörr, Lås tills vidare och Häv uppställning" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>Styr dörren: öppna, ställ upp eller lås</figcaption></figure>
+      <figure><img src="assets/app/ios-oversikt.webp" alt="iPhone: översikten Just nu med antal larm, fel och frånkopplade, och siterna i listan" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>Läget just nu över alla siter</figcaption></figure>
+      <figure><img src="assets/app/ios-sok.webp" alt="iPhone: sökningen dörr visar dörrarna i Hus A med en Öppna-knapp på varje" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>Sök dörr, detektor eller plats, med text eller röst</figcaption></figure>
+      <figure><img src="assets/app/android-snabb.webp" alt="Android: snabblarmets inställningar, kontot får larma, larmnyckeln inlagd, platsen tillåten" loading="lazy" width="600" height="1300"><figcaption><b>Android</b>Snabblarmet: tyst överfall med position</figcaption></figure>
+    </div>
+    <p class="note">Bilder från demoanläggningen Kvarteret Björken.</p>
+
+    <div class="cols mt">
+      <div class="block">
+        <h3>Larm som hörs</h3>
+        <ul class="checks">
+          <li><div>Brandlarmet tystnar inte av sig självt<span>Det ljuder tills någon stänger av det, också på ljudlöst och genom Stör ej</span></div></li>
+          <li><div>Kvittera från telefonen<span>När larmcentralen kvitterar tystnar telefonerna</span></div></li>
+          <li><div>Du väljer vad som hörs<span>Brand, överfall, inbrott, dörrar och fel var för sig</span></div></li>
+        </ul>
+        <h3 style="margin-top:1.6rem">Styrning med fingeravtryck</h3>
+        <p>Öppna och ställ upp dörrar, koppla från och in brand och inbrott. Varje kommando bekräftas med fingeravtryck eller Face ID och går direkt till er egen server, aldrig via oss.</p>
+      </div>
+      <div class="block">
+        <h3>Lista eller ritning</h3>
+        <p>Listan visar läget över alla siter, hus och ritningar på en gång. Ritningen visar kartan, huset och planritningen med det larmande donet utmärkt, precis som på datorn.</p>
+        <h3 style="margin-top:1.6rem">Röstsökning</h3>
+        <p>Tryck på mikrofonen och säg "dörrar plan 3" eller "frånkopplat". Talet blir text i telefonen, och bara texten går till Spine som en sökning. Inget ljud sparas eller skickas. Sökningen visar, den öppnar aldrig något.</p>
+        <h3 style="margin-top:1.6rem">Överfall</h3>
+        <p>Håll in knappen i tre sekunder, i appen, i widgeten eller i snabbinställningen. På iPhone räcker två tryck på Action-knappen inom fem sekunder. Telefonen är sedan helt tyst och skickar larmet och sin position var 15:e sekund tills en operatör återställer. Bara konton som fått det påslaget kan larma.</p>
+      </div>
+    </div>
+    <div class="stores">
+      <span class="store" id="store-ios"><small>iPhone</small><b>App Store</b></span>
+      <span class="store snart"><small>Android · granskas nu</small><b>Google Play</b></span>
+    </div>
+    <p class="note">Telefonen kopplas till Spine med en QR-kod från datorn. <a href="app/integritet/">Integritetspolicy för appen</a></p>
   </div>
 </section>
 
@@ -993,7 +1051,7 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
       <div class="arrow"><svg viewBox="0 0 60 14" preserveAspectRatio="none"><line x1="0" y1="7" x2="52" y2="7"/><path d="M52 2 L60 7 L52 12 Z"/></svg><span>ringer ut</span></div>
       <div class="node core"><span class="zone">Hos kunden eller värdad</span><h4>Spine-server</h4><p>Håller läget, kalendern, journalen och behörigheterna.</p></div>
       <div class="arrow"><svg viewBox="0 0 60 14" preserveAspectRatio="none"><line x1="0" y1="7" x2="52" y2="7"/><path d="M52 2 L60 7 L52 12 Z"/></svg><span class="tech">HTTPS<br>WebSocket</span></div>
-      <div class="node"><span class="zone">Användare</span><h4>Webbläsare &amp; telefon</h4><p>Inget att installera. Fungerar som app på telefonen med push.</p></div>
+      <div class="node"><span class="zone">Användare</span><h4>Webbläsare &amp; telefon</h4><p>I webbläsaren utan installation, eller i appen för iPhone och Android.</p></div>
     </div>
 
     <h3 class="sub">Varje kommando bekräftas av centralen</h3>
@@ -1534,7 +1592,7 @@ const ST_ORDER=["normal","fire","prealarm","fault","disabled","test","offline","
 document.getElementById("strip").innerHTML=ST_ORDER.map(s=>`<div>${STDEMO[s][1]}<span>${esc(STDEMO[s][0])}</span></div>`).join("")+["Dörr normal","Forcerad","Upplåst","Blockerad"].map((n,i)=>`<div>${STDEMO.door[1][i]}<span>${n}</span></div>`).join("");
 
 /* ——— kanaler, sviter, live ——— */
-const CH=[["Push till telefon","drift","Spine fungerar som app på telefonen och skickar larm direkt."],["Microsoft Teams","drift","Larmkort i en kanal med de viktigaste uppgifterna."],["SMS och MMS","drift","MMS bär bilden från kameran eller ritningen."],["E-post","drift","Med bild inbäddad eller bifogad."],["Webhook","drift","Till valfritt system, med bild."],["RCS","drift","Kort med ritning och kamerabild, knappen Öppna i Spine och SMS som reserv."],["Larmsida","drift","SMS-mottagare öppnar larmet med ritning och bild via en länk, utan app."]];
+const CH=[["Push till telefon","drift","Appen för iPhone och Android får larmen direkt, också på ljudlöst."],["Microsoft Teams","drift","Larmkort i en kanal med de viktigaste uppgifterna."],["SMS och MMS","drift","MMS bär bilden från kameran eller ritningen."],["E-post","drift","Med bild inbäddad eller bifogad."],["Webhook","drift","Till valfritt system, med bild."],["RCS","drift","Kort med ritning och kamerabild, knappen Öppna i Spine och SMS som reserv."],["Larmsida","drift","SMS-mottagare öppnar larmet med ritning och bild via en länk, utan app."]];
 document.getElementById("chan").innerHTML=CH.map(([n,s,t])=>`<div><h4>${esc(n)}<span class="pill ${s}">${S[s]}</span></h4><p>${esc(t)}</p></div>`).join("");
 const SU=[["hedengren-disciplin",244],["handboken",153],["rco-opc",110],["arx",127],["analys-mcp",96],["brivo-iam",91],["schemablock",85],["discipliner",82],["auth",85],["hedengren-driver",73],["topologi",71],["kamerafonster",62],["provplan",56],["provlage-server",56],["kundpaket",50],["consilium",45],["sakerhetsgranskning",415],["intents",59],["licence",41],["securifire-export",34],["vendor-isolering",33],["paketsignatur",32],["modbus",32],["securifire-modbus",32],["planerat",30],["serverhemligheter",30],["wave-driver",27],["sakerhetskopia",27],["granskning",35],["tls",22],["ritningens-avkodare",19],["csp",14],["north-pin",13]];
 document.getElementById("suites").innerHTML=SU.map(([n,c])=>`<span>${n}<b>${c}</b></span>`).join("");

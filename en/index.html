@@ -257,6 +257,17 @@ section.sec:not(.alt) .metrics div{background:var(--ink)}
 .cap.x{background:none;width:14px;height:2px;border-radius:1px;background:var(--dim)}
 .legend{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;font-size:.8rem;color:var(--mute);margin-top:.9rem}
 .legend span{display:flex;align-items:center;gap:.45rem}
+.phones{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);padding:.2rem 0 1rem;margin:0 calc(-1*var(--gut));padding-inline:var(--gut);scrollbar-width:thin}
+.phones figure{margin:0;flex:0 0 clamp(11rem,22vw,14.5rem);scroll-snap-align:start}
+.phones img{display:block;width:100%;height:auto;aspect-ratio:600/1300;object-fit:cover;object-position:top;border-radius:1.6rem;border:6px solid #1c2226;box-shadow:0 1.2rem 2.4rem rgba(0,0,0,.35);background:#0d1114}
+.phones figcaption{font-size:.82rem;color:var(--mute);margin-top:.7rem;line-height:1.4}
+.phones figcaption b{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glow);font-weight:400;margin-bottom:.2rem}
+.stores{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.6rem 0 0}
+.store{display:inline-flex;flex-direction:column;justify-content:center;min-width:11rem;padding:.6rem 1.1rem;border-radius:.7rem;border:1px solid var(--line,rgba(255,255,255,.18));color:inherit;text-decoration:none;line-height:1.25}
+a.store:hover{border-color:var(--glow)}
+.store small{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.store b{font-weight:500;font-size:1.05rem}
+.store.snart{opacity:.75}
 .pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px;border:1px solid;white-space:nowrap}
 .pill.drift{color:var(--ok);border-color:rgba(79,199,154,.45);background:rgba(79,199,154,.08)}
 .pill.byggd{color:var(--warn);border-color:rgba(233,182,74,.45);background:rgba(233,182,74,.08)}
@@ -459,6 +470,7 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
       <li><a class="l" href="#sa-fungerar">How it works</a></li>
       <li><a class="l" href="#block">Modules</a></li>
       <li><a class="l" href="#larm">Alarms</a></li>
+      <li><a class="l" href="#appen">App</a></li>
       <li><a class="l" href="#styrning">Control</a></li>
       <li><a class="l" href="#autoplacering">Auto-placement</a></li>
       <li><a class="l" href="#discipliner">Symbols</a></li>
@@ -666,6 +678,52 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
         <p>The page is stored on the phone. The first start takes around five seconds on a weak connection, the next under a second.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- APPEN -->
+<section class="sec alt" id="appen">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="k">The app</span>
+      <h2>Spine in your pocket, for iPhone and Android</h2>
+      <p>Alarms reach the phone and sound even when it is on silent. From the same app you acknowledge, open doors and disable detectors. The app only talks to your own Spine server.</p>
+    </div>
+    <div class="phones">
+      <figure><img src="../assets/app/android-larm.webp" alt="Android: full-screen fire alarm over the lock screen with the buttons Open Spine, Acknowledge and Silence" loading="lazy" width="600" height="1300"><figcaption><b>Android</b>The fire alarm takes the whole screen, over the lock screen too</figcaption></figure>
+      <figure><img src="../assets/app/ios-larm.webp" alt="iPhone: active fire alarm with camera image and the buttons Acknowledge, Point and On the drawing" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>The alarm with the camera image, acknowledge right away</figcaption></figure>
+      <figure><img src="../assets/app/ios-dorr.webp" alt="iPhone: a door with the buttons Open momentarily, Hold open, Lock until further notice and Release hold" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>Control the door: open, hold open or lock</figcaption></figure>
+      <figure><img src="../assets/app/ios-oversikt.webp" alt="iPhone: the Right now overview with counts of alarms, faults and disabled points, and the sites in the list" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>The state right now across all sites</figcaption></figure>
+      <figure><img src="../assets/app/ios-sok.webp" alt="iPhone: searching for door shows the doors in Building A with an Open button on each" loading="lazy" width="600" height="1300"><figcaption><b>iPhone</b>Search for a door, detector or place, by text or voice</figcaption></figure>
+      <figure><img src="../assets/app/android-snabb.webp" alt="Android: hold-up settings, the account may raise alarms, alarm key stored, location allowed" loading="lazy" width="600" height="1300"><figcaption><b>Android</b>Hold-up: a silent alarm with position</figcaption></figure>
+    </div>
+    <p class="note">Screens from the demo site Kvarteret Björken, shown in Swedish.</p>
+
+    <div class="cols mt">
+      <div class="block">
+        <h3>Alarms you hear</h3>
+        <ul class="checks">
+          <li><div>A fire alarm never stops by itself<span>It sounds until someone silences it, on silent and through Do Not Disturb too</span></div></li>
+          <li><div>Acknowledge from the phone<span>When the control room acknowledges, the phones go quiet</span></div></li>
+          <li><div>You choose what sounds<span>Fire, hold-up, intrusion, doors and faults separately</span></div></li>
+        </ul>
+        <h3 style="margin-top:1.6rem">Control with your fingerprint</h3>
+        <p>Open and hold doors open, disable and enable fire and intrusion. Every command is confirmed with fingerprint or Face ID and goes straight to your own server, never through us.</p>
+      </div>
+      <div class="block">
+        <h3>List or drawing</h3>
+        <p>The list shows the state of all sites, buildings and drawings at once. The drawing view shows the map, the building and the floor plan with the alarming device marked, just as on the computer.</p>
+        <h3 style="margin-top:1.6rem">Voice search</h3>
+        <p>Tap the microphone and say "doors floor 3" or "disabled". Speech becomes text on the phone, and only the text goes to Spine as a search. No audio is stored or sent. Search shows things; it never opens anything.</p>
+        <h3 style="margin-top:1.6rem">Hold-up</h3>
+        <p>Hold the button for three seconds, in the app, the widget or the quick settings. On iPhone, two presses of the Action button within five seconds is enough. The phone then stays completely silent and sends the alarm and its position every 15 seconds until an operator resets it. Only accounts that have it switched on can raise it.</p>
+      </div>
+    </div>
+    <div class="stores">
+      <span class="store" id="store-ios"><small>iPhone</small><b>App Store</b></span>
+      <span class="store snart"><small>Android · in review</small><b>Google Play</b></span>
+    </div>
+    <p class="note">The phone is linked to Spine with a QR code from the computer. <a href="app/privacy/">Privacy policy for the app</a></p>
   </div>
 </section>
 
@@ -993,7 +1051,7 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
       <div class="arrow"><svg viewBox="0 0 60 14" preserveAspectRatio="none"><line x1="0" y1="7" x2="52" y2="7"/><path d="M52 2 L60 7 L52 12 Z"/></svg><span>dials out</span></div>
       <div class="node core"><span class="zone">On the customer's premises or hosted</span><h4>Spine server</h4><p>Holds the state, the calendar, the journal and the permissions.</p></div>
       <div class="arrow"><svg viewBox="0 0 60 14" preserveAspectRatio="none"><line x1="0" y1="7" x2="52" y2="7"/><path d="M52 2 L60 7 L52 12 Z"/></svg><span class="tech">HTTPS<br>WebSocket</span></div>
-      <div class="node"><span class="zone">Users</span><h4>Browser &amp; phone</h4><p>Nothing to install. Works as an app on the phone with push.</p></div>
+      <div class="node"><span class="zone">Users</span><h4>Browser &amp; phone</h4><p>In the browser with nothing to install, or in the app for iPhone and Android.</p></div>
     </div>
 
     <h3 class="sub">Every command is confirmed by the panel</h3>
@@ -1534,7 +1592,7 @@ const ST_ORDER=["normal","fire","prealarm","fault","disabled","test","offline","
 document.getElementById("strip").innerHTML=ST_ORDER.map(s=>`<div>${STDEMO[s][1]}<span>${esc(STDEMO[s][0])}</span></div>`).join("")+["Door normal","Forced","Unlocked","Blocked"].map((n,i)=>`<div>${STDEMO.door[1][i]}<span>${n}</span></div>`).join("");
 
 /* ——— channels, suites, live ——— */
-const CH=[["Push to phone","drift","Spine works as an app on the phone and sends alarms directly."],["Microsoft Teams","drift","Alarm card in a channel with the key details."],["SMS and MMS","drift","MMS carries the image from the camera or the floor plan."],["Email","drift","With the image embedded or attached."],["Webhook","drift","To any system, with image."],["RCS","drift","A card with floor plan and camera image, an Open in Spine button and SMS as fallback."],["Alarm page","drift","SMS recipients open the alarm with floor plan and image through a link, no app needed."]];
+const CH=[["Push to phone","drift","The app for iPhone and Android gets alarms directly, on silent too."],["Microsoft Teams","drift","Alarm card in a channel with the key details."],["SMS and MMS","drift","MMS carries the image from the camera or the floor plan."],["Email","drift","With the image embedded or attached."],["Webhook","drift","To any system, with image."],["RCS","drift","A card with floor plan and camera image, an Open in Spine button and SMS as fallback."],["Alarm page","drift","SMS recipients open the alarm with floor plan and image through a link, no app needed."]];
 document.getElementById("chan").innerHTML=CH.map(([n,s,t])=>`<div><h4>${esc(n)}<span class="pill ${s}">${S[s]}</span></h4><p>${esc(t)}</p></div>`).join("");
 const SU=[["hedengren-disciplin",244],["handboken",153],["rco-opc",110],["arx",127],["analys-mcp",96],["brivo-iam",91],["schemablock",85],["discipliner",82],["auth",85],["hedengren-driver",73],["topologi",71],["kamerafonster",62],["provplan",56],["provlage-server",56],["kundpaket",50],["consilium",45],["sakerhetsgranskning",415],["intents",59],["licence",41],["securifire-export",34],["vendor-isolering",33],["paketsignatur",32],["modbus",32],["securifire-modbus",32],["planerat",30],["serverhemligheter",30],["wave-driver",27],["sakerhetskopia",27],["granskning",35],["tls",22],["ritningens-avkodare",19],["csp",14],["north-pin",13]];
 document.getElementById("suites").innerHTML=SU.map(([n,c])=>`<span>${n}<b>${c}</b></span>`).join("");
