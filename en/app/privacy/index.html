@@ -25,9 +25,9 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 <body>
 <main>
 <h1>Spine app – privacy</h1>
-<p class="mute">Applies to Spine for Android and iPhone (industries.spine.app). Last changed 6 November 2026. <a href="/app/integritet/">Svenska</a></p>
+<p class="mute">Applies to Spine for Android and iPhone (industries.spine.app). Last changed 16 November 2026. <a href="/app/integritet/">Svenska</a></p>
 
-<p>The Spine app is an alarm and control client for a Spine system. It is published by Ampano Technologies AB, Sundsvall, Sweden. It connects to a Spine server owned and operated by the organisation you use the app for, for example a property owner or an alarm operator. That organisation is responsible for the data on its server and for how long it is kept.</p>
+<p>The Spine app is an alarm and control client for a Spine system. It is provided by SVA System AB. In Google Play and the App Store the publisher is Ampano Technologies AB, which publishes the app for SVA System. It connects to a Spine server owned and operated by the organisation you use the app for, for example a property owner or an alarm operator. That organisation is responsible for the data on its server and for how long it is kept.</p>
 <p>The app has no advertising, no analytics and no trackers. No data is sold or shared for marketing.</p>
 
 <h2>Sent to your organisation's Spine server</h2>
@@ -40,9 +40,9 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 <li><b>Location, only for the hold-up alarm.</b> If you have turned on the hold-up alarm yourself and hold the button for three seconds (on iPhone also two presses of the Action button within five seconds), the phone's location is sent about every 15 seconds until an operator resets the alarm. Operators see it, and it is kept in the system's log. The app never reads your location otherwise.</li>
 </ul>
 
-<h2>Through Ampano's push relay, Google and Apple</h2>
+<h2>Through SVA System's push relay, Google and Apple</h2>
 <ul>
-<li><b>Notifications</b> are encrypted by your organisation's server so that only your phone can read them (RFC 8291). Ampano's relay and Google Firebase Cloud Messaging, and on iPhone the Apple Push Notification service (APNs), deliver them and see only the push address, the time and an encrypted body of the same size every time.</li>
+<li><b>Notifications</b> are encrypted by your organisation's server so that only your phone can read them (RFC 8291). SVA System's relay and Google Firebase Cloud Messaging, and on iPhone the Apple Push Notification service (APNs), deliver them and see only the push address, the time and an encrypted body of the same size every time.</li>
 <li><b>Acknowledgements from a notification and hold-up alarms</b> can go through the relay when the phone cannot reach the server directly. They are signed by the phone, so the relay cannot change them. They are not encrypted towards the relay, so the relay can read an acknowledgement comment and, for a hold-up alarm, the location. The relay keeps them in memory until the server collects them, at most one day, and does not write them to disk.</li>
 </ul>
 
@@ -65,8 +65,7 @@ table{border-collapse:collapse;width:100%;font-size:15px}td,th{border-top:1px so
 </ul>
 
 <h2>Contact</h2>
-<p>About the app and the push relay: Ampano Technologies AB, Sundsvall, Sweden. <a href="mailto:tomas.rick@ampano.se">tomas.rick@ampano.se</a></p>
-<p>Spine is sold and delivered by SVA System AB (556565-6120). <a href="mailto:info@svasystem.se">info@svasystem.se</a>, +46 72 32 91 412</p>
+<p>About the app, the push relay and Spine: SVA System AB (556565-6120), Sweden. <a href="mailto:info@svasystem.se">info@svasystem.se</a>, <a href="mailto:tomas@svasystem.se">tomas@svasystem.se</a>, +46 72 32 91 412</p>
 </main>
 </body>
 </html>
