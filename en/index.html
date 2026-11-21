@@ -500,7 +500,7 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
       <p class="lede lay">All your security systems in one picture. Spine connects fire alarm, intrusion alarm, access control, cameras and emergency lighting, whatever the make, and shows everything on the building's own floor plans.</p>
       <p class="lede tech">A top layer over existing panels. Per-make drivers dial out to a site server, every point gets a stable id and every command is confirmed by read-back from the panel.</p>
       <div class="hero-facts">
-        <div><b>14</b>makes and channels</div>
+        <div><b>Open</b>talks to any make, via open protocols or a dedicated driver</div>
         <div><b>&lt; 1 s</b>from button press to confirmation from the panel</div>
         <div><b>2,775</b>symbols placed automatically in a large site, 11 sheets, in under a minute</div>
         <div><b>10 years</b>of security updates per version</div>
@@ -1021,8 +1021,8 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
   <div class="wrap">
     <div class="sec-head">
       <span class="k">Integrations</span>
-      <h2>The makes Spine talks to</h2>
-      <p>Each make has its own package that speaks that system's language. Click a make to see what Spine can do with it.</p>
+      <h2>Open to every make</h2>
+      <p>Spine talks to any system, via open protocols such as OPC UA, Modbus and BACnet or a dedicated driver. If a make is missing, the driver is built together with the project. Here are some examples; click a make to see what Spine can do with it.</p>
     </div>
     <div class="tscroll">
       <table class="matrix" id="matrix">
@@ -1446,6 +1446,27 @@ const I=[
  states:["FireUnit, DisableUnit, FaultUnit","FireZone, FaultZone, DisableZone","IOUnit, StatusIOUnit","Measured values: write 40065, read 30065–30072"],
  cmds:[["Silence","40017, 40019, 40021"],["Reset silenced","40018, 40020, 40022"],["Reset all","40023–40025"],["Disable / enable","FC16 40090–40091, result in 30091"],["Output","FC16 40092–40093, result in 30093"]],
  gotchas:["The registers move when units are added","Customer texts and event log are not in the spec"]},
+{id:"esser",name:"Honeywell ESSER",disc:["fire"],status:"byggd",proto:"BACnet/IP via MPG",cap:"ppppx",
+ lay:"Fire panels from Honeywell ESSER via the MPG gateway and BACnet/IP. Built and being tested against real gateways.",
+ see:["Fire alarm, pre-alarm, fault, technical alarm and test mode","Zones, detectors, call points and sounders","Disabled via zone"],
+ do:["Disable and enable detector and zone","Reset, silence, buzzer off, alarm delay and revision"],
+ pts:"From the gateway's EDE file, before the gateway is in place. Automatic placement from the same file.",
+ spec:[["Transport","BACnet/IP, fixed addresses, no broadcast"],["Events","Spine is a recipient in the notification classes; the whole list is re-read every minute"]],
+ states:["BACnet Life Safety: alarm, pre-alarm, fault, not ready, test"],
+ cmds:[["Disable / enable","Mode written and read back"],["Panel commands","Pulses, confirmed when the output switches"]],
+ gotchas:["Measured values and contamination are not available in Life Safety mode"]},
+{id:"siemens",name:"Siemens Sinteso / Cerberus Pro",disc:["fire"],status:"byggd",proto:"BACnet/IP",cap:"ppppx",
+ lay:"FS20 fire panels via BACnet/IP, each panel its own device. Built, being tested on a new site.",
+ see:["Fire alarm, pre-alarm, fault and disablement","Zones and detectors"],
+ do:["Disable and enable","Panel commands"],
+ pts:"From the site's export file. Automatic placement per zone.",
+ spec:[["Transport","BACnet/IP, Spine as client to each panel"],["Basis","The vendor's BACnet description"]],
+ states:["Per BACnet and the vendor's extensions"],
+ cmds:[["Disable / enable","Confirmed by the panel"]],
+ gotchas:[]},
+{id:"notifier",name:"Honeywell ID3000, PEARL, INSPIRE",disc:["fire"],status:"planerad",proto:"To be decided",cap:"nnnnx",
+ lay:"Fire panels from Honeywell. The driver is built together with a project.",
+ see:["Planned"],do:["Planned"],pts:"Planned.",spec:[["Basis","Protocol chosen with the vendor"]],states:["Unknown"],cmds:[["Unknown","Declared by the driver"]],gotchas:[]},
 {id:"hedengren",name:"Hedengren",disc:["fire","emergency","intrusion"],status:"drift",proto:"Cloud · REST",cap:"yyyyy",
  lay:"Firescape fire alarm, Neptolux emergency lighting and HHL intrusion, via Hedengren's cloud. Spine already reads over 2 000 points live. The cloud is used for overview, never as a life-safety path.",
  see:["Fire alarm, fault, disablement, walk test","Emergency lighting: lit, battery fault, battery capacity","Intrusion: alarm and tamper","Contamination per detector"],
@@ -1501,6 +1522,9 @@ const I=[
  see:["Cameras online, recording, fault"],do:["Still image on alarm","Live view","Bookmark in the recording"],pts:"Directly from the video system.",
  spec:[["Transport","REST port 7001, v3 → v2 → v1"],["Security","The certificate is pinned on SHA-256"]],
  states:["Online, Recording, Offline, Unauthorized"],cmds:[["Bookmark","−30/+120 s, tag spine"]],gotchas:["No real server has responded yet"]},
+{id:"milestone",name:"Milestone XProtect",disc:["cctv"],status:"planerad",proto:"To be decided",cap:"nxnxx",
+ lay:"Cameras from Milestone in Spine, next to the alarms on the drawing.",
+ see:["Planned"],do:["Planned"],pts:"Planned.",spec:[["Basis","Milestone's SDK"]],states:["Unknown"],cmds:[["Unknown","Declared by the driver"]],gotchas:[]},
 {id:"evac",name:"Voice evacuation",disc:["evac"],status:"planerad",proto:"Unknown",cap:"nnnnx",
  lay:"The next integration. Voice evacuation is shown on the same floor plans as the fire alarm, so the operator sees both the alarm and the evacuation in one picture.",
  see:["Planned: operating state, faults and activated messages per zone"],do:["Planned"],pts:"Planned.",spec:[["Basis","Make and protocol to be decided"]],states:["Unknown"],cmds:[["Unknown","Declared by the driver"]],gotchas:[]},

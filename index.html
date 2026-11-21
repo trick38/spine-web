@@ -500,7 +500,7 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
       <p class="lede lay">Alla säkerhetssystem i en och samma bild. Spine kopplar ihop brandlarm, inbrottslarm, passersystem, kameror och nödbelysning, oavsett fabrikat, och visar allt på husets egna ritningar.</p>
       <p class="lede tech">Ett toppskikt ovanpå befintliga centraler. Drivrutiner per fabrikat ringer ut till en siteserver, varje punkt får ett stabilt id och varje kommando bekräftas genom read-back mot centralen.</p>
       <div class="hero-facts">
-        <div><b>14</b>fabrikat och kanaler</div>
+        <div><b>Öppet</b>talar med alla fabrikat, via öppna protokoll eller egen drivrutin</div>
         <div><b>&lt; 1 s</b>från knapptryck till bekräftelse från centralen</div>
         <div><b>2 775</b>symboler placerade automatiskt i en stor anläggning, 11 blad, på under en minut</div>
         <div><b>10 år</b>säkerhetsuppdateringar per version</div>
@@ -1021,8 +1021,8 @@ footer .kontakt a{color:inherit}footer .kontakt a:hover{color:var(--fg)}
   <div class="wrap">
     <div class="sec-head">
       <span class="k">Integrationer</span>
-      <h2>Fabrikaten Spine talar med</h2>
-      <p>Varje fabrikat har ett eget paket som talar just det systemets språk. Klicka på ett fabrikat för att se vad Spine kan göra med det.</p>
+      <h2>Öppet för alla fabrikat</h2>
+      <p>Spine talar med alla system, via öppna protokoll som OPC UA, Modbus och BACnet eller en egen drivrutin. Saknas ett fabrikat byggs drivrutinen i samband med projektet. Här är några exempel; klicka på ett fabrikat för att se vad Spine kan göra med det.</p>
     </div>
     <div class="tscroll">
       <table class="matrix" id="matrix">
@@ -1446,6 +1446,27 @@ const I=[
  states:["FireUnit, DisableUnit, FaultUnit","FireZone, FaultZone, DisableZone","IOUnit, StatusIOUnit","Mätvärden: skriv 40065, läs 30065–30072"],
  cmds:[["Tysta","40017, 40019, 40021"],["Återställ tystat","40018, 40020, 40022"],["Återställ allt","40023–40025"],["Frånkoppla / tillkoppla","FC16 40090–40091, resultat i 30091"],["Utgång","FC16 40092–40093, resultat i 30093"]],
  gotchas:["Registren flyttar när enheter läggs till","Kundtexter och händelselogg finns inte i specen"]},
+{id:"esser",name:"Honeywell ESSER",disc:["fire"],status:"byggd",proto:"BACnet/IP via MPG",cap:"ppppx",
+ lay:"Brandlarmscentraler från Honeywell ESSER via gatewayen MPG och BACnet/IP. Byggd och provas mot riktiga gateways.",
+ see:["Brandlarm, förlarm, fel, tekniskt larm och provläge","Sektioner, detektorer, larmknappar och larmdon","Frånkopplad via sektion"],
+ do:["Frånkoppla och tillkoppla detektor och sektion","Återställ, tysta, summer av, larmlagring och revision"],
+ pts:"Ur gatewayens EDE-fil, innan gatewayen är på plats. Autoplacering ur samma fil.",
+ spec:[["Transport","BACnet/IP, fasta adresser, ingen broadcast"],["Händelser","Spine står som mottagare i larmklasserna; hela listan läses om varje minut"]],
+ states:["BACnet Life Safety: larm, förlarm, fel, ej klar, prov"],
+ cmds:[["Frånkoppla / tillkoppla","Mode skrivs och läses tillbaka"],["Centralens kommandon","Pulser, bekräftas av att utgången slår till"]],
+ gotchas:["Mätvärden och nedsmutsning finns inte i Life Safety-läget"]},
+{id:"siemens",name:"Siemens Sinteso / Cerberus Pro",disc:["fire"],status:"byggd",proto:"BACnet/IP",cap:"ppppx",
+ lay:"Brandlarmscentraler FS20 via BACnet/IP, varje central som egen enhet. Byggd, provas på en ny anläggning.",
+ see:["Brandlarm, förlarm, fel och frånkoppling","Sektioner och detektorer"],
+ do:["Frånkoppla och tillkoppla","Centralens kommandon"],
+ pts:"Ur anläggningens exportfil. Autoplacering per sektion.",
+ spec:[["Transport","BACnet/IP, Spine som klient till varje central"],["Underlag","Leverantörens BACnet-beskrivning"]],
+ states:["Enligt BACnet och leverantörens tillägg"],
+ cmds:[["Frånkoppla / tillkoppla","Bekräftas av centralen"]],
+ gotchas:[]},
+{id:"notifier",name:"Honeywell ID3000, PEARL, INSPIRE",disc:["fire"],status:"planerad",proto:"Bestäms",cap:"nnnnx",
+ lay:"Brandlarmscentraler från Honeywell. Drivrutinen byggs i samband med ett projekt.",
+ see:["Planerat"],do:["Planerat"],pts:"Planerat.",spec:[["Underlag","Protokoll väljs med leverantören"]],states:["Okänt"],cmds:[["Okänt","Deklareras av drivrutinen"]],gotchas:[]},
 {id:"hedengren",name:"Hedengren",disc:["fire","emergency","intrusion"],status:"drift",proto:"Moln · REST",cap:"yyyyy",
  lay:"Firescape brandlarm, Neptolux nödbelysning och HHL inbrott, via Hedengrens moln. Spine läser redan över 2 000 punkter skarpt. Molnet används för överblick, aldrig som livssäkerhetsväg.",
  see:["Brandlarm, fel, frånkoppling, walk-test","Nödljus: lyser, batterifel, batterikapacitet","Inbrott: larm och sabotage","Nedsmutsning per detektor"],
@@ -1501,6 +1522,9 @@ const I=[
  see:["Kameror online, inspelning, fel"],do:["Stillbild vid larm","Livebild","Bokmärke i inspelningen"],pts:"Direkt ur videosystemet.",
  spec:[["Transport","REST port 7001, v3 → v2 → v1"],["Säkerhet","Certifikatet nålas på SHA-256"]],
  states:["Online, Recording, Offline, Unauthorized"],cmds:[["Bokmärke","−30/+120 s, tagg spine"]],gotchas:["Ingen riktig server har svarat ännu"]},
+{id:"milestone",name:"Milestone XProtect",disc:["cctv"],status:"planerad",proto:"Bestäms",cap:"nxnxx",
+ lay:"Kameror från Milestone i Spine, bredvid larmen på ritningen.",
+ see:["Planerat"],do:["Planerat"],pts:"Planerat.",spec:[["Underlag","Milestones SDK"]],states:["Okänt"],cmds:[["Okänt","Deklareras av drivrutinen"]],gotchas:[]},
 {id:"evac",name:"Talat utrymningslarm",disc:["evac"],status:"planerad",proto:"Okänt",cap:"nnnnx",
  lay:"Nästa integration. Talat utrymningslarm visas på samma ritningar som brandlarmet, så operatören ser både larmet och utrymningen i samma bild.",
  see:["Planerat: driftläge, fel och aktiverade meddelanden per zon"],do:["Planerat"],pts:"Planerat.",spec:[["Underlag","Fabrikat och protokoll bestäms"]],states:["Okänt"],cmds:[["Okänt","Deklareras av drivrutinen"]],gotchas:[]},
